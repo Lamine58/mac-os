@@ -24,7 +24,7 @@
         @click="openApp('home')"
         title="Accueil"
       >
-        <img :src="`/files/${dockIcons[2]}`" :alt="dockIcons[2]">
+        <img :src="getAssetPath(`files/${dockIcons[2]}`)" :alt="dockIcons[2]">
       </div>
       <div 
         class="dock-icon" 
@@ -32,7 +32,7 @@
         @click="openApp('messages')"
         title="Messages"
       >
-        <img :src="`/files/${dockIcons[3]}`" :alt="dockIcons[3]">
+        <img :src="getAssetPath(`files/${dockIcons[3]}`)" :alt="dockIcons[3]">
       </div>
       <div 
         class="dock-icon" 
@@ -40,7 +40,7 @@
         @click="openApp('mail')"
         title="Mail"
       >
-        <img :src="`/files/${dockIcons[4]}`" :alt="dockIcons[4]">
+        <img :src="getAssetPath(`files/${dockIcons[4]}`)" :alt="dockIcons[4]">
       </div>
       <div 
         class="dock-icon" 
@@ -48,7 +48,7 @@
         @click="openApp('maps')"
         title="Plans"
       >
-        <img :src="`/files/${dockIcons[5]}`" :alt="dockIcons[5]">
+        <img :src="getAssetPath(`files/${dockIcons[5]}`)" :alt="dockIcons[5]">
       </div>
       <div 
         class="dock-icon" 
@@ -56,7 +56,7 @@
         @click="openApp('photos')"
         title="Photos"
       >
-        <img :src="`/files/${dockIcons[6]}`" :alt="dockIcons[6]">
+        <img :src="getAssetPath(`files/${dockIcons[6]}`)" :alt="dockIcons[6]">
       </div>
       <div 
         class="dock-icon" 
@@ -64,7 +64,7 @@
         @click="openApp('facetime')"
         title="FaceTime"
       >
-        <img :src="`/files/${dockIcons[7]}`" :alt="dockIcons[7]">
+        <img :src="getAssetPath(`files/${dockIcons[7]}`)" :alt="dockIcons[7]">
       </div>
       <div 
         class="dock-icon" 
@@ -72,7 +72,7 @@
         @click="openApp('contacts')"
         title="Contacts"
       >
-        <img :src="`/files/${dockIcons[8]}`" :alt="dockIcons[8]">
+        <img :src="getAssetPath(`files/${dockIcons[8]}`)" :alt="dockIcons[8]">
       </div>
       <div 
         class="dock-icon" 
@@ -80,7 +80,7 @@
         @click="openApp('music')"
         title="Musique"
       >
-        <img :src="`/files/${dockIcons[9]}`" :alt="dockIcons[9]">
+        <img :src="getAssetPath(`files/${dockIcons[9]}`)" :alt="dockIcons[9]">
       </div>
       <div 
         class="dock-icon" 
@@ -88,7 +88,7 @@
         @click="openApp('keynote')"
         title="Keynote"
       >
-        <img :src="`/files/${dockIcons[10]}`" :alt="dockIcons[10]">
+        <img :src="getAssetPath(`files/${dockIcons[10]}`)" :alt="dockIcons[10]">
       </div>
       <div 
         class="dock-icon" 
@@ -96,7 +96,7 @@
         @click="openApp('appStore')"
         title="App Store"
       >
-        <img :src="`/files/${dockIcons[11]}`" :alt="dockIcons[11]">
+        <img :src="getAssetPath(`files/${dockIcons[11]}`)" :alt="dockIcons[11]">
       </div>
       <div 
         class="dock-icon" 
@@ -104,7 +104,7 @@
         @click="openApp('systemPreferences')"
         title="Préférences Système"
       >
-        <img :src="`/files/${dockIcons[12]}`" :alt="dockIcons[12]">
+        <img :src="getAssetPath(`files/${dockIcons[12]}`)" :alt="dockIcons[12]">
       </div>
       <div 
         class="dock-icon" 
@@ -112,7 +112,7 @@
         @click="openApp('terminal')"
         title="Terminal"
       >
-        <img :src="`/files/${dockIcons[13]}`" :alt="dockIcons[13]">
+        <img :src="getAssetPath(`files/${dockIcons[13]}`)" :alt="dockIcons[13]">
       </div>
       <div 
         class="dock-icon" 
@@ -120,7 +120,7 @@
         @click="openApp('xcode')"
         title="Xcode"
       >
-        <img :src="`/files/${dockIcons[14]}`" :alt="dockIcons[14]">
+        <img :src="getAssetPath(`files/${dockIcons[14]}`)" :alt="dockIcons[14]">
       </div>
       <div 
         class="dock-icon" 
@@ -128,7 +128,7 @@
         @click="openApp('keychain')"
         title="Trousseau d'accès"
       >
-        <img :src="`/files/${dockIcons[15]}`" :alt="dockIcons[15]">
+        <img :src="getAssetPath(`files/${dockIcons[15]}`)" :alt="dockIcons[15]">
       </div>
       <div 
         class="dock-icon" 
@@ -136,7 +136,7 @@
         @click="openApp('notes')"
         title="Notes"
       >
-        <img :src="`/files/${dockIcons[16]}`" :alt="dockIcons[16]">
+        <img :src="getAssetPath(`files/${dockIcons[16]}`)" :alt="dockIcons[16]">
       </div>
       <div 
         class="dock-icon" 
@@ -144,7 +144,7 @@
         @click="openApp('pages')"
         title="Pages"
       >
-        <img :src="`/files/${dockIcons[17]}`" :alt="dockIcons[17]">
+        <img :src="getAssetPath(`files/${dockIcons[17]}`)" :alt="dockIcons[17]">
       </div>
       <div 
         class="dock-icon" 
@@ -152,7 +152,7 @@
         @click="openApp('numbers')"
         title="Numbers"
       >
-        <img :src="`/files/${dockIcons[18]}`" :alt="dockIcons[18]">
+        <img :src="getAssetPath(`files/${dockIcons[18]}`)" :alt="dockIcons[18]">
       </div>
       <div 
         class="dock-icon" 
@@ -160,7 +160,7 @@
         @click="openApp('calculator')"
         title="Calculatrice"
       >
-        <img :src="`/files/${dockIcons[19]}`" :alt="dockIcons[19]">
+        <img :src="getAssetPath(`files/${dockIcons[19]}`)" :alt="dockIcons[19]">
       </div>
     </div>
     <div class="dock-separator"></div>

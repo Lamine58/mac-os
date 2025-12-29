@@ -41,7 +41,7 @@ const allWebsites: Website[] = [
   { name: "RSM-CI", url: "https://rsm-ci.net" },
   { name: "MySoft-C", url: "https://mysoft-c.com" },
   { name: "CCIAMA Tchad", url: "https://cciama-td.com" },
-  { name: "JeDonne.ci", url: "https://jedonne.ci" },
+  { name: "Je Donne.ci", url: "https://jedonne.ci" },
   { name: "Liste de Mariage", url: "https://listedemariage.ci" },
   { name: "TikaHarvest", url: "https://tikaharvest.com" },
   { name: "GPE Abidjan", url: "https://gpe-abidjan.net" },

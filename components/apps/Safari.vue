@@ -109,7 +109,8 @@ const isValidUrl = computed(() => {
 })
 
 const favorites = [
-  { name: 'Rsm CI', url: 'https://www.rsm-ci.net', icon: 'R', color: '#4285F4' },
+  { name: 'Mon portfolio', url: 'https://lamine58.github.io/portofolio', icon: 'MP', color: '#428500' },
+  { name: 'RSM CI', url: 'https://www.rsm-ci.net', icon: 'R', color: '#4285F4' },
   { name: 'Mysoft', url: 'https://mysoft-c.com', icon: 'M', color: '#FF0000' },
   { name: 'Coriginal', url: 'https://coriginal.ci', icon: 'C', color: '#24292e' },
   { name: 'Lasersmedical', url: 'https://lasersmedical.fr', icon: 'L', color: '#0077B5' },

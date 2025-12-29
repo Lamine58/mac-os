@@ -114,7 +114,7 @@ const favorites = [
   { name: 'Mysoft', url: 'https://mysoft-c.com', icon: 'M', color: '#FF0000' },
   { name: 'Coriginal', url: 'https://coriginal.ci', icon: 'C', color: '#24292e' },
   { name: 'Lasersmedical', url: 'https://lasersmedical.fr', icon: 'L', color: '#0077B5' },
-  { name: 'Paiement PRO', url: 'https://paiementpro.net', icon: 'P', color: '#0077B5' }
+  // { name: 'Paiement PRO', url: 'https://paiementpro.net', icon: 'P', color: '#0077B5' }
 ]
 
 const getDomain = (url: string) => {

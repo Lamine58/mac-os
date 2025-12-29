@@ -5,14 +5,14 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  // 👉 Nécessaire pour GitHub Pages
+  // 👉 Pour GitHub Pages (site statique)
   ssr: false,
   nitro: {
     preset: 'github-pages'
   },
 
   app: {
-    baseURL: '/mac-os/', // nom du repo GitHub
+    baseURL: '/mac-os/', // nom EXACT du repo GitHub
 
     pageTransition: { name: 'page', mode: 'out-in' },
 

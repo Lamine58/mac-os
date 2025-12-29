@@ -20,10 +20,10 @@ const props = defineProps<{
 
 
 const emit = defineEmits<{
-
-const { getAssetPath } = useAssetPath()
   close: []
 }>()
+
+const { getAssetPath } = useAssetPath()
 
 </script>
 

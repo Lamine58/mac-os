@@ -11,6 +11,12 @@ export default defineNuxtConfig({
     preset: 'github-pages'
   },
 
+  runtimeConfig: {
+    public: {
+      baseURL: '/mac-os/'
+    }
+  },
+
   app: {
     baseURL: '/mac-os/', // nom EXACT du repo GitHub
 

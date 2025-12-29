@@ -7,7 +7,7 @@
     @click="handleClick"
     @mousedown="handleMouseDown"
   >
-    <img src="/images/folder.png" alt="Folder Icon" class="icon-img">
+    <img :src="getAssetPath('images/folder.png')" alt="Folder Icon" class="icon-img">
     {{ name }}
   </div>
 </template>
@@ -21,6 +21,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   click: []
 }>()
+
+const { getAssetPath } = useAssetPath()
 
 const isDragging = ref(false)
 const offsetX = ref(0)

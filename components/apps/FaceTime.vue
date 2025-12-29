@@ -6,7 +6,7 @@
   >
     <div class="app-simple">
       <div class="app-icon">
-        <img src="/files/facetime-2021-04-30.webp" alt="FaceTime">
+        <img :src="getAssetPath('files/facetime-2021-04-30.webp')" alt="FaceTime">
       </div>
       <div class="app-name">FaceTime</div>
     </div>
@@ -18,9 +18,13 @@ const props = defineProps<{
   isOpen: boolean
 }>()
 
+
 const emit = defineEmits<{
+
+const { getAssetPath } = useAssetPath()
   close: []
 }>()
+
 </script>
 
 <style scoped>

@@ -60,7 +60,7 @@
           frameborder="0"
         ></iframe>
         <div v-else class="safari-home">
-          <img src="/files/icon_safari.png" alt="Safari Logo" width="100" style="margin-bottom: 20px;"> 
+          <img :src="getAssetPath('files/icon_safari.png')" alt="Safari Logo" width="100" style="margin-bottom: 20px;"> 
           <div class="safari-favorites">
             <h3>Favoris</h3>
             <div class="favorites-grid">
@@ -89,6 +89,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   close: []
 }>()
+
+const { getAssetPath } = useAssetPath()
 
 const currentUrl = ref('')
 const history = ref<string[]>([])

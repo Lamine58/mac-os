@@ -1,5 +1,5 @@
 <template>
-  <div class="desktop">
+  <div class="desktop" :style="{ '--base-url': baseURL }">
     <div class="background-content"></div>
 
     <MenuBar />
@@ -65,6 +65,8 @@ definePageMeta({
 })
 
 const currentFolder = ref('')
+const config = useRuntimeConfig()
+const baseURL = config.public.baseURL || '/mac-os/'
 
 const apps = ref({
   finder: false,

@@ -8,7 +8,7 @@
         @click="openApp('finder')"
         title="Finder"
       >
-        <img :src="`/files/${dockIcons[0]}`" :alt="dockIcons[0]">
+        <img :src="getAssetPath(`files/${dockIcons[0]}`)" :alt="dockIcons[0]">
       </div>
       <div 
         class="dock-icon" 
@@ -16,7 +16,7 @@
         @click="openApp('safari')"
         title="Safari"
       >
-        <img :src="`/files/${dockIcons[1]}`" :alt="dockIcons[1]">
+        <img :src="getAssetPath(`files/${dockIcons[1]}`)" :alt="dockIcons[1]">
       </div>
       <div 
         class="dock-icon"
@@ -175,6 +175,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   'open-app': [appName: string]
 }>()
+
+const { getAssetPath } = useAssetPath()
 
 const dockIcons = [
   'Finder_Icon_macOS_Big_Sur.png',

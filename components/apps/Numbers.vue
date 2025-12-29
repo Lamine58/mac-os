@@ -6,7 +6,7 @@
   >
     <div class="app-simple">
       <div class="app-icon">
-        <img src="/files/numbers-2021-11-15.webp" alt="Numbers">
+        <img :src="getAssetPath('files/numbers-2021-11-15.webp')" alt="Numbers">
       </div>
       <div class="app-name">Numbers</div>
     </div>
@@ -18,9 +18,13 @@ const props = defineProps<{
   isOpen: boolean
 }>()
 
+
 const emit = defineEmits<{
+
+const { getAssetPath } = useAssetPath()
   close: []
 }>()
+
 </script>
 
 <style scoped>

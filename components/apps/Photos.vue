@@ -76,14 +76,16 @@ const emit = defineEmits<{
   close: []
 }>()
 
+const { getAssetPath } = useAssetPath()
+
 const photos = [
-  '/images/epis.png',
-  '/images/agt.png',
-  '/images/ict.png',
-  '/images/sm.jpeg',
-  '/images/push.jpg',
-  '/images/ppro.png',
-  '/images/ic.png'
+  getAssetPath('images/epis.png'),
+  getAssetPath('images/agt.png'),
+  getAssetPath('images/ict.png'),
+  getAssetPath('images/sm.jpeg'),
+  getAssetPath('images/push.jpg'),
+  getAssetPath('images/ppro.png'),
+  getAssetPath('images/ic.png')
 ]
 
 const lightboxOpen = ref(false)

@@ -6,7 +6,7 @@
   >
     <div class="app-simple">
       <div class="app-icon">
-        <img src="/files/icon_message.png" alt="Messages">
+        <img :src="getAssetPath('files/icon_message.png')" alt="Messages">
       </div>
       <div class="app-name">Messages</div>
     </div>
@@ -21,6 +21,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   close: []
 }>()
+
+const { getAssetPath } = useAssetPath()
 </script>
 
 <style scoped>

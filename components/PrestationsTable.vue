@@ -59,14 +59,16 @@ type Prestation = {
   image: string
 }
 
+const { getAssetPath } = useAssetPath()
+
 const allPrestations: Prestation[] = [
-  { name: 'Epistrophe.png', image: '/images/epis.png' },
-  { name: 'AGT.png', image: '/images/agt.png' },
-  { name: 'ICT4DEV.png', image: '/images/ict.png' },
-  { name: 'Smahiley.png', image: '/images/sm.jpeg' },
-  { name: 'Push.png', image: '/images/push.jpg' },
-  { name: 'Paiement PRO.png', image: '/images/ppro.png' },
-  { name: 'IC-Digital Tans.png', image: '/images/ic.png' }
+  { name: 'Epistrophe.png', image: getAssetPath('images/epis.png') },
+  { name: 'AGT.png', image: getAssetPath('images/agt.png') },
+  { name: 'ICT4DEV.png', image: getAssetPath('images/ict.png') },
+  { name: 'Smahiley.png', image: getAssetPath('images/sm.jpeg') },
+  { name: 'Push.png', image: getAssetPath('images/push.jpg') },
+  { name: 'Paiement PRO.png', image: getAssetPath('images/ppro.png') },
+  { name: 'IC-Digital Tans.png', image: getAssetPath('images/ic.png') }
 ]
 
 const filteredPrestations = computed(() => {

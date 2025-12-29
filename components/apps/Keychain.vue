@@ -6,7 +6,7 @@
   >
     <div class="app-simple">
       <div class="app-icon">
-        <img src="/files/keychain-access-2021-05-03.webp" alt="Trousseau d'accès">
+        <img :src="getAssetPath('files/keychain-access-2021-05-03.webp')" alt="Trousseau d'accès">
       </div>
       <div class="app-name">Trousseau d'accès</div>
     </div>
@@ -18,9 +18,13 @@ const props = defineProps<{
   isOpen: boolean
 }>()
 
+
 const emit = defineEmits<{
+
+const { getAssetPath } = useAssetPath()
   close: []
 }>()
+
 </script>
 
 <style scoped>

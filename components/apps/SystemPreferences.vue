@@ -6,7 +6,7 @@
   >
     <div class="app-simple">
       <div class="app-icon">
-        <img src="/files/system-preferences-2021-06-03.webp" alt="Préférences Système">
+        <img :src="getAssetPath('files/system-preferences-2021-06-03.webp')" alt="Préférences Système">
       </div>
       <div class="app-name">Préférences Système</div>
     </div>
@@ -18,9 +18,13 @@ const props = defineProps<{
   isOpen: boolean
 }>()
 
+
 const emit = defineEmits<{
+
+const { getAssetPath } = useAssetPath()
   close: []
 }>()
+
 </script>
 
 <style scoped>

@@ -1,0 +1,27 @@
+Lettre de Motivation
+
+Hasrafidine Abdel-Lamine Ishola
+Développeur Web et Mobile
+Email : isholalamine41@gmail.com
+Téléphone : 0172560115
+Adresse : Paillet, Abidjan
+Date : [Date actuelle]
+
+Objet : Candidature pour un poste de Développeur Web et Mobile
+
+Madame, Monsieur,
+
+Fort de mon expérience de plus de 5 ans dans le développement d'applications web et mobiles, je souhaite mettre mes compétences au service de votre entreprise. Titulaire d'un Master en Génie Logiciel obtenu en 2020, j'ai développé une expertise solide dans les technologies modernes telles que Flutter, Ionic, Laravel et Vue.js.
+
+Mon parcours professionnel m'a permis d'acquérir une expérience significative dans le développement d'applications performantes. J'ai notamment travaillé en tant que Développeur Web chez SDSI de 2019 à 2021, où j'ai développé des applications en utilisant les frameworks Ionic, Laravel et .NET. Par la suite, en tant que Développeur Mobile & Web chez Enistrophe Côte d'Ivoire de 2021 à 2022, j'ai renforcé mes compétences dans le développement d'applications mobiles et web.
+
+Une de mes fiertés professionnelles est d'avoir développé et publié 7 applications sur le Google Play Store, démontrant ma capacité à créer des solutions complètes alliant un front-end soigné avec Ionic et Flutter, et des backends robustes avec Laravel.
+
+Ma polyvalence technique, alliée à ma capacité à comprendre les besoins métier et à proposer des solutions adaptées, fait de moi un développeur capable de s'intégrer rapidement dans vos équipes et de contribuer efficacement à vos projets.
+
+Je serais ravi de pouvoir discuter de ma candidature lors d'un entretien et de vous présenter plus en détail mes réalisations et ma motivation à rejoindre votre équipe.
+
+Dans l'attente de votre retour, je vous prie d'agréer, Madame, Monsieur, l'expression de mes salutations distinguées.
+
+Hasrafidine Abdel-Lamine Ishola
+

@@ -2,7 +2,7 @@
   <div class="login-container">
     <div id="user-info" class="fade-in">
       <div class="avatar-circle">
-        <img src="/files/image-2ce6dbd2-3849-4bee-b436-50efd717a9e0.png" alt="Avatar Utilisateur">
+        <img :src="getAssetPath('files/image-2ce6dbd2-3849-4bee-b436-50efd717a9e0.png')" alt="Avatar Utilisateur">
       </div>
       
       <p class="username">Ishola Hasrafidine</p>
@@ -41,6 +41,8 @@ definePageMeta({
   }
 })
 
+const { getAssetPath } = useAssetPath()
+
 const password = ref('')
 const hasError = ref(false)
 const correctPassword = 'azerty'
@@ -78,7 +80,7 @@ body {
   align-items: center;
   height: 100vh;
   overflow: hidden;
-  background-image: url('/files/bg.jpg');
+  background-image: url('/mac-os/files/bg.jpg');
   background-size: cover;
   background-position: center;
 }

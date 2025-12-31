@@ -272,8 +272,8 @@ body, html {
 }
 
 .dock-icon {
-    width: 50px;
-    height: 50px;
+    width: var(--dock-icon-size, 50px);
+    height: var(--dock-icon-size, 50px);
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -287,7 +287,16 @@ body, html {
 }
 
 .dock-icon:hover {
-    transform: scale(1.2);
+    transform: scale(var(--dock-magnification, 1.2));
+}
+
+.dock.dock-hidden {
+    transform: translateX(-50%) translateY(calc(100% - 20px));
+    transition: transform 0.3s ease-in-out;
+}
+
+.dock.dock-hidden:hover {
+    transform: translateX(-50%) translateY(0);
 }
 
 .dock-icon.active-app::after {
@@ -363,7 +372,7 @@ body, html {
     color: white; 
     transform: scale(0.95);
     opacity: 0;
-    transition: transform 0.2s ease-out, opacity 0.2s ease-out, width 0.3s ease-out, height 0.3s ease-out;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
 }
 
 .finder-window.open {
@@ -378,7 +387,85 @@ body, html {
     top: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    transition: width 0.3s ease-out, height 0.3s ease-out;
+}
+
+/* Bordures pour le redimensionnement du Finder */
+.finder-window {
+    position: relative;
+}
+
+.finder-window .resize-handle {
+    position: absolute;
+    background: transparent;
+    z-index: 10;
+}
+
+.finder-window .resize-handle-top {
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    cursor: ns-resize;
+}
+
+.finder-window .resize-handle-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    cursor: ns-resize;
+}
+
+.finder-window .resize-handle-left {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    cursor: ew-resize;
+}
+
+.finder-window .resize-handle-right {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 4px;
+    cursor: ew-resize;
+}
+
+.finder-window .resize-handle-top-left {
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    cursor: nwse-resize;
+}
+
+.finder-window .resize-handle-top-right {
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    cursor: nesw-resize;
+}
+
+.finder-window .resize-handle-bottom-left {
+    bottom: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    cursor: nesw-resize;
+}
+
+.finder-window .resize-handle-bottom-right {
+    bottom: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    cursor: nwse-resize;
+}
+
+.finder-window.maximized .resize-handle {
+    display: none;
 }
 
 .window-header {

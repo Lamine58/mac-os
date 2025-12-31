@@ -1,7 +1,8 @@
 <template>
   <div 
-    class="finder-window open"
-    :class="{ maximized: isMaximized }"
+    ref="windowElement"
+    class="finder-window"
+    :class="{ open: props.isOpen !== false, maximized: isMaximized }"
     :style="{ 
       left: position.x + 'px', 
       top: position.y + 'px', 
@@ -13,7 +14,7 @@
   >
     <div class="window-header" @mousedown.stop="handleHeaderMouseDown">
       <div class="traffic-lights">
-        <span class="close-btn" style="background-color: #ff5f56;" title="Fermer" @click.stop="$emit('close')"></span>
+        <span class="close-btn" style="background-color: #ff5f56;" title="Fermer" @click.stop="closeWindow"></span>
         <span class="minimize-btn" style="background-color: #ffbd2e;" title="Réduire" @click.stop="minimize"></span>
         <span class="maximize-btn" style="background-color: #27c93f;" title="Agrandir" @click.stop="maximize"></span>
       </div>
@@ -104,12 +105,24 @@
         </div>
       </div>
     </div>
+    
+    <!-- Bordures pour le redimensionnement -->
+    <div class="resize-handle resize-handle-top" @mousedown.stop="handleResizeStart($event, 'top')"></div>
+    <div class="resize-handle resize-handle-bottom" @mousedown.stop="handleResizeStart($event, 'bottom')"></div>
+    <div class="resize-handle resize-handle-left" @mousedown.stop="handleResizeStart($event, 'left')"></div>
+    <div class="resize-handle resize-handle-right" @mousedown.stop="handleResizeStart($event, 'right')"></div>
+    <div class="resize-handle resize-handle-top-left" @mousedown.stop="handleResizeStart($event, 'top-left')"></div>
+    <div class="resize-handle resize-handle-top-right" @mousedown.stop="handleResizeStart($event, 'top-right')"></div>
+    <div class="resize-handle resize-handle-bottom-left" @mousedown.stop="handleResizeStart($event, 'bottom-left')"></div>
+    <div class="resize-handle resize-handle-bottom-right" @mousedown.stop="handleResizeStart($event, 'bottom-right')"></div>
   </div>
 </template>
 
 <script setup lang="ts">
 const props = defineProps<{
   currentFolder: string
+  isOpen?: boolean
+  forceFocus?: number
 }>()
 
 const emit = defineEmits<{
@@ -119,15 +132,19 @@ const emit = defineEmits<{
   'open-text': [file: string, name: string]
 }>()
 
-const { getNextZIndex } = useWindowFocus()
+const { getNextZIndex, getLowZIndex } = useWindowFocus()
+const { getNextPosition, removeWindow } = useWindowPosition()
 
 const folders = ['Parcours', 'Prestations', 'Sites et Applications', 'Applications mobiles']
-const position = ref({ x: 150, y: 100 })
 const windowWidth = ref(900)
 const windowHeight = ref(700)
+// Position initiale sera calculée par getNextPosition
+const position = ref({ x: 150, y: 100 })
 const originalPosition = ref({ x: 150, y: 100 })
 const originalSize = ref({ width: 900, height: 700 })
-const zIndex = ref(5000)
+// Le Finder commence avec un z-index très bas pour rester en arrière-plan
+// Il ne passera au premier plan que quand on clique dessus explicitement
+const zIndex = ref(getLowZIndex())
 const isWindowDragging = ref(false)
 const windowOffsetX = ref(0)
 const windowOffsetY = ref(0)
@@ -135,9 +152,37 @@ const searchQuery = ref('')
 const isMaximized = ref(false)
 const sidebarOpen = ref(false)
 const isMobile = ref(false)
+const windowId = 'finder'
+const isResizing = ref(false)
+const resizeDirection = ref<string>('')
+const resizeStartX = ref(0)
+const resizeStartY = ref(0)
+const resizeStartWidth = ref(0)
+const resizeStartHeight = ref(0)
+const resizeStartLeft = ref(0)
+const resizeStartTop = ref(0)
+
+const windowElement = ref<HTMLElement | null>(null)
 
 const focusWindow = () => {
-  zIndex.value = getNextZIndex()
+  const newZIndex = getNextZIndex()
+  zIndex.value = newZIndex
+  // Forcer la mise à jour immédiate dans le DOM
+  if (windowElement.value) {
+    windowElement.value.style.zIndex = newZIndex.toString()
+  }
+}
+
+// Watch sur zIndex pour mettre à jour le DOM (sécurité)
+watch(zIndex, (newZIndex) => {
+  if (windowElement.value) {
+    windowElement.value.style.zIndex = newZIndex.toString()
+  }
+}, { immediate: true })
+
+const closeWindow = () => {
+  removeWindow(windowId)
+  emit('close')
 }
 
 const windowTitle = computed(() => {
@@ -215,24 +260,109 @@ const handleHeaderMouseDown = (e: MouseEvent) => {
   }
 }
 
-onMounted(() => {
-  // Mettre automatiquement au premier plan quand la fenêtre s'ouvre
-  nextTick(() => {
+const handleResizeStart = (e: MouseEvent, direction: string) => {
+  if (isMaximized.value) return
+  
+  focusWindow()
+  isResizing.value = true
+  resizeDirection.value = direction
+  resizeStartX.value = e.clientX
+  resizeStartY.value = e.clientY
+  resizeStartWidth.value = windowWidth.value
+  resizeStartHeight.value = windowHeight.value
+  resizeStartLeft.value = position.value.x
+  resizeStartTop.value = position.value.y
+  e.preventDefault()
+  e.stopPropagation()
+}
+
+// Watch pour forcer le focus quand forceFocus change
+watch(() => props.forceFocus, (newValue, oldValue) => {
+  if (props.isOpen && newValue !== oldValue && newValue !== undefined) {
+    nextTick(() => {
+      focusWindow()
+    })
+  }
+}, { immediate: false })
+
+// Watch pour détecter quand la fenêtre s'ouvre/ferme
+watch(() => props.isOpen, (isOpen, wasOpen) => {
+  if (isOpen) {
+    // Mettre au premier plan IMMÉDIATEMENT
     focusWindow()
-  })
+    
+    nextTick(() => {
+      // Toujours calculer une nouvelle position pour éviter les superpositions
+      const newPosition = getNextPosition(windowId, true)
+      position.value = newPosition
+      originalPosition.value = { ...newPosition }
+    })
+  } else {
+    // Retirer la fenêtre de la liste quand elle se ferme
+    removeWindow(windowId)
+    // Réduire le z-index pour qu'elle passe en arrière-plan
+    zIndex.value = getLowZIndex()
+  }
+}, { immediate: true })
+
+onMounted(() => {
+  // Calculer la position quand la fenêtre s'ouvre
+  if (props.isOpen !== false) {
+    nextTick(() => {
+      // Calculer une position décalée pour éviter les superpositions
+      const newPosition = getNextPosition(windowId, true)
+      position.value = newPosition
+      originalPosition.value = { ...newPosition }
+      // NE PAS mettre au premier plan automatiquement - le Finder reste en arrière-plan
+      // Il passera au premier plan seulement quand on clique dessus
+    })
+  }
   
   // Détecter si on est sur mobile
   checkMobile()
   window.addEventListener('resize', checkMobile)
   
   const handleMouseMove = (e: MouseEvent) => {
-    if (!isWindowDragging.value || isMaximized.value) return
-    position.value.x = e.clientX - windowOffsetX.value
-    position.value.y = e.clientY - windowOffsetY.value
+    if (isResizing.value) {
+      const deltaX = e.clientX - resizeStartX.value
+      const deltaY = e.clientY - resizeStartY.value
+      const minWidth = 728
+      const minHeight = 499
+      
+      if (resizeDirection.value.includes('right')) {
+        windowWidth.value = Math.max(minWidth, resizeStartWidth.value + deltaX)
+      }
+      if (resizeDirection.value.includes('left')) {
+        const newWidth = Math.max(minWidth, resizeStartWidth.value - deltaX)
+        if (newWidth > minWidth) {
+          position.value.x = resizeStartLeft.value + (resizeStartWidth.value - newWidth)
+          windowWidth.value = newWidth
+        }
+      }
+      if (resizeDirection.value.includes('bottom')) {
+        windowHeight.value = Math.max(minHeight, resizeStartHeight.value + deltaY)
+      }
+      if (resizeDirection.value.includes('top')) {
+        const newHeight = Math.max(minHeight, resizeStartHeight.value - deltaY)
+        if (newHeight > minHeight) {
+          position.value.y = resizeStartTop.value + (resizeStartHeight.value - newHeight)
+          windowHeight.value = newHeight
+        }
+      }
+    } else if (isWindowDragging.value && !isMaximized.value) {
+      position.value.x = e.clientX - windowOffsetX.value
+      position.value.y = e.clientY - windowOffsetY.value
+    }
   }
   
   const handleMouseUp = () => {
-    isWindowDragging.value = false
+    if (isWindowDragging.value) {
+      isWindowDragging.value = false
+    }
+    if (isResizing.value) {
+      isResizing.value = false
+      resizeDirection.value = ''
+    }
   }
   
   document.addEventListener('mousemove', handleMouseMove)
@@ -242,6 +372,7 @@ onMounted(() => {
     window.removeEventListener('resize', checkMobile)
     document.removeEventListener('mousemove', handleMouseMove)
     document.removeEventListener('mouseup', handleMouseUp)
+    removeWindow(windowId)
   })
 })
 </script>

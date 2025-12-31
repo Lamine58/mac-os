@@ -2,6 +2,7 @@
   <AppWindow 
     :title="'Calculatrice'"
     :is-open="isOpen"
+    :force-focus="forceFocus"
     :initial-x="200"
     :initial-y="150"
     @close="$emit('close')"
@@ -42,6 +43,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
+  forceFocus?: number
   isOpen: boolean
 }>()
 

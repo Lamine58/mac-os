@@ -2,6 +2,7 @@
   <AppWindow 
     :title="currentUrl || 'Safari'"
     :is-open="isOpen"
+    :force-focus="forceFocus"
     @close="$emit('close')"
   >
     <div class="safari-content">
@@ -84,6 +85,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   isOpen: boolean
+  forceFocus?: number
 }>()
 
 const emit = defineEmits<{

@@ -2,20 +2,15 @@
   <AppWindow 
     :title="'Photos'"
     :is-open="isOpen"
+    :force-focus="forceFocus"
     @close="$emit('close')"
   >
     <div class="photos-content">
       <div class="photos-sidebar">
         <div class="photos-section">
           <div class="section-title">Bibliothèque</div>
-          <div class="section-item active">
+          <div class="section-item">
             <i class="bi bi-images"></i> Toutes les photos
-          </div>
-          <div class="section-item">
-            <i class="bi bi-heart"></i> Favoris
-          </div>
-          <div class="section-item">
-            <i class="bi bi-camera"></i> Appareil photo
           </div>
         </div>
       </div>
@@ -69,6 +64,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
+  forceFocus?: number
   isOpen: boolean
 }>()
 

@@ -1,5 +1,12 @@
 <template>
-  <div class="dock">
+  <div 
+    class="dock" 
+    :class="{ 'dock-hidden': dockAutoHide }"
+    :style="{
+      '--dock-icon-size': `${dockIconSize}px`,
+      '--dock-magnification': dockMagnification ? '1.2' : '1'
+    }"
+  >
     <div class="dock-separator"></div>
     <div class="dock-icon-group">
       <div 
@@ -168,6 +175,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
 const props = defineProps<{
   activeApps: Record<string, boolean>
 }>()
@@ -177,6 +186,14 @@ const emit = defineEmits<{
 }>()
 
 const { getAssetPath } = useAssetPath()
+const { dockSize, dockAutoHide, dockMagnification } = useDockSettings()
+
+// Calculer la taille des icônes basée sur le pourcentage (30-100% de 50px = 15px à 50px)
+const dockIconSize = computed(() => {
+  const minSize = 15
+  const maxSize = 50
+  return minSize + ((dockSize.value - 30) / 70) * (maxSize - minSize)
+})
 
 const dockIcons = [
   'Finder_Icon_macOS_Big_Sur.png',

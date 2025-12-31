@@ -2,6 +2,7 @@
   <AppWindow 
     :title="'Plans'"
     :is-open="isOpen"
+    :force-focus="forceFocus"
     @close="$emit('close')"
   >
     <div class="maps-content">
@@ -18,7 +19,7 @@
       </div>
       <div class="maps-view">
         <div class="maps-placeholder">
-          <i class="bi bi-geo-alt" style="font-size: 64px; color: #007aff; margin-bottom: 20px;"></i>
+          <img :src="getAssetPath('files/maps-2023-05-19.webp')" alt="Plans" class="maps-icon">
           <h2>Plans</h2>
           <p>Recherchez un lieu ou une adresse</p>
           <div v-if="searchQuery" class="search-results">
@@ -35,6 +36,7 @@
 
 <script setup lang="ts">
 const props = defineProps<{
+  forceFocus?: number
   isOpen: boolean
 }>()
 
@@ -42,6 +44,7 @@ const emit = defineEmits<{
   close: []
 }>()
 
+const { getAssetPath } = useAssetPath()
 const searchQuery = ref('')
 
 const openInGoogleMaps = () => {
@@ -102,6 +105,13 @@ const openInGoogleMaps = () => {
   padding: 40px;
 }
 
+.maps-icon {
+  width: 128px;
+  height: 128px;
+  margin-bottom: 20px;
+  object-fit: contain;
+}
+
 .maps-placeholder h2 {
   margin: 0 0 10px 0;
   font-size: 32px;
@@ -124,4 +134,5 @@ const openInGoogleMaps = () => {
   font-size: 14px;
 }
 </style>
+
 

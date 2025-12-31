@@ -1,14 +1,15 @@
 <template>
   <AppWindow 
-    :title="'Accueil'"
+    :title="'iPhone 16 Pro de Lamine'"
     :is-open="isOpen"
+    :force-focus="forceFocus"
+    :hide-maximize="true"
+    :initial-width="393"
+    :initial-height="852"
     @close="$emit('close')"
   >
-    <div class="app-simple">
-      <div class="app-icon">
-        <img :src="getAssetPath('files/home-2021-05-03.webp')" alt="Accueil">
-      </div>
-      <div class="app-name">Accueil</div>
+    <div class="home-content">
+      <img :src="getAssetPath('files/app-home.png')" alt="Accueil" class="home-image">
     </div>
   </AppWindow>
 </template>
@@ -16,6 +17,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   isOpen: boolean
+  forceFocus?: number
 }>()
 
 const emit = defineEmits<{
@@ -26,34 +28,24 @@ const { getAssetPath } = useAssetPath()
 </script>
 
 <style scoped>
-.app-simple {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.home-content {
+  width: 100%;
   height: 100%;
-  background: #1e1e1e;
-  gap: 20px;
-}
-
-.app-icon {
-  width: 128px;
-  height: 128px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #000;
+  overflow: hidden;
+  padding: 20px;
 }
 
-.app-icon img {
+.home-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-
-.app-name {
-  font-size: 18px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  display: block;
+  border-radius: 40px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
 }
 </style>
 

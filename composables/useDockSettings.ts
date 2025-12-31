@@ -1,6 +1,6 @@
 import { ref, watch } from 'vue'
 
-const dockSize = ref(50)
+const dockSize = ref(100)
 const dockAutoHide = ref(false)
 const dockMagnification = ref(true)
 
@@ -41,4 +41,5 @@ export function useDockSettings() {
     dockMagnification
   }
 }
+
 

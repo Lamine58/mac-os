@@ -1,30 +1,30 @@
 <template>
   <div>
     <div v-if="filteredPrestations.length === 0 && props.searchQuery" class="no-results">
-      <p>Aucun résultat trouvé pour "{{ props.searchQuery }}"</p>
+      <p class="no-results-text">Aucun résultat trouvé pour "{{ props.searchQuery }}"</p>
     </div>
-    <table v-else id="prestation">
+    <table v-else id="prestation" class="prestations-table">
       <tbody>
         <tr>
           <td 
             v-for="prestation in filteredPrestations.slice(0, 5)" 
             :key="prestation.name" 
-            style="width: 100px;cursor: pointer;"
+            class="prestation-cell"
             @click="openLightbox(prestation)"
           >
-            <img :src="prestation.image" style="width: 100px;" :alt="prestation.name">
-            <div style="width: 100px;text-align: center;"><small>{{ prestation.name }}</small></div>
+            <img :src="prestation.image" class="prestation-image" :alt="prestation.name">
+            <div class="prestation-name"><small>{{ prestation.name }}</small></div>
           </td>
         </tr>
         <tr v-if="filteredPrestations.length > 5">
           <td 
             v-for="prestation in filteredPrestations.slice(5)" 
             :key="prestation.name" 
-            style="width: 100px;cursor: pointer;"
+            class="prestation-cell"
             @click="openLightbox(prestation)"
           >
-            <img :src="prestation.image" style="width: 100px;" :alt="prestation.name">
-            <div style="width: 100px;text-align: center;"><small>{{ prestation.name }}</small></div>
+            <img :src="prestation.image" class="prestation-image" :alt="prestation.name">
+            <div class="prestation-name"><small>{{ prestation.name }}</small></div>
           </td>
         </tr>
       </tbody>
@@ -221,8 +221,54 @@ onMounted(() => {
 .no-results {
   text-align: center;
   padding: 40px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.prestations-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 15px;
+}
+
+.prestation-cell {
+  width: 100px;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.3s ease;
+  vertical-align: top;
+  text-align: center;
+}
+
+.prestation-cell:hover {
+  transform: translateY(-2px);
+}
+
+.prestation-image {
+  width: 100px;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
+}
+
+.prestation-cell:hover .prestation-image {
+  border-color: var(--text-color-secondary);
+}
+
+.prestation-name {
+  width: 100px;
+  text-align: center;
+  margin-top: 8px;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.prestation-name small {
+  font-size: 11px;
+  color: var(--text-color-secondary);
+  transition: color 0.3s ease;
 }
 </style>
 

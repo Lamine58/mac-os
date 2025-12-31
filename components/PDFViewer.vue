@@ -88,24 +88,26 @@ onMounted(() => {
 .pdf-viewer-content {
   width: 90%;
   height: 90%;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-window);
   backdrop-filter: blur(10px);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   animation: zoomInMac 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .pdf-viewer-header {
   display: flex;
   align-items: center;
   padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-window-header);
+  border-bottom: 1px solid var(--border-color);
   position: relative;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .pdf-viewer-traffic-lights {
@@ -140,7 +142,7 @@ onMounted(() => {
 }
 
 .pdf-viewer-title {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   font-size: 14px;
   font-weight: 500;
   flex: 1;
@@ -149,6 +151,7 @@ onMounted(() => {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
+  transition: color 0.3s ease;
 }
 
 .pdf-viewer-body {
@@ -158,6 +161,8 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   position: relative;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 .pdf-viewer-actions {
@@ -172,19 +177,20 @@ onMounted(() => {
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--bg-sidebar);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: white;
+  color: var(--text-color);
   text-decoration: none;
   font-size: 13px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .pdf-action-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: var(--hover-bg);
   transform: translateY(-2px);
+  border-color: var(--text-color-secondary);
 }
 
 .pdf-iframe {
@@ -201,15 +207,18 @@ onMounted(() => {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   padding: 20px;
+  transition: color 0.3s ease;
 }
 
 .pdf-error i {
   font-size: 48px;
   margin-bottom: 15px;
   display: block;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
+  opacity: 0.6;
+  transition: color 0.3s ease;
 }
 
 .pdf-error p {

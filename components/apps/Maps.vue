@@ -64,17 +64,18 @@ const openInGoogleMaps = () => {
   display: flex;
   gap: 10px;
   padding: 15px;
-  background: #252525;
-  border-bottom: 1px solid #333;
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .maps-search-input {
   flex: 1;
   padding: 10px 15px;
   border-radius: 8px;
-  border: 1px solid #555;
-  background: #3e3e3e;
-  color: white;
+  border: 1px solid var(--border-color);
+  background: var(--hover-bg);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  color: var(--text-color);
   font-size: 14px;
   outline: none;
 }
@@ -84,14 +85,20 @@ const openInGoogleMaps = () => {
   border: none;
   width: 40px;
   border-radius: 8px;
-  color: white;
+  color: #ffffff;
   cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-btn:hover {
+  background: #0056b3;
 }
 
 .maps-view {
   flex: 1;
   position: relative;
-  background: #1a1a1a;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 .maps-placeholder {
@@ -100,7 +107,7 @@ const openInGoogleMaps = () => {
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   text-align: center;
   padding: 40px;
 }
@@ -116,7 +123,7 @@ const openInGoogleMaps = () => {
   margin: 0 0 10px 0;
   font-size: 32px;
   font-weight: 300;
-  color: white;
+  color: var(--text-color);
 }
 
 .search-results {
@@ -129,9 +136,15 @@ const openInGoogleMaps = () => {
   background: #007aff;
   border: none;
   border-radius: 8px;
-  color: white;
+  color: #ffffff;
   cursor: pointer;
   font-size: 14px;
+  font-weight: 200;
+  transition: background 0.2s;
+}
+
+.open-maps-btn:hover {
+  background: #0056b3;
 }
 </style>
 

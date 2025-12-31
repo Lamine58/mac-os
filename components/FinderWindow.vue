@@ -75,7 +75,7 @@
             <div class="folder-name">{{ folder }}</div>
           </div>
           <div v-if="filteredFolders.length === 0 && searchQuery" class="no-results">
-            <p style="text-align: center; padding: 40px; color: rgba(255, 255, 255, 0.6);">
+            <p class="no-results-text">
               Aucun résultat trouvé pour "{{ searchQuery }}"
             </p>
           </div>
@@ -137,11 +137,11 @@ const { getNextPosition, removeWindow } = useWindowPosition()
 
 const folders = ['Parcours', 'Prestations', 'Sites et Applications', 'Applications mobiles']
 const windowWidth = ref(900)
-const windowHeight = ref(700)
+const windowHeight = ref(600)
 // Position initiale sera calculée par getNextPosition
 const position = ref({ x: 150, y: 100 })
 const originalPosition = ref({ x: 150, y: 100 })
-const originalSize = ref({ width: 900, height: 700 })
+const originalSize = ref({ width: 900, height: 600 })
 // Le Finder commence avec un z-index très bas pour rester en arrière-plan
 // Il ne passera au premier plan que quand on clique dessus explicitement
 const zIndex = ref(getLowZIndex())

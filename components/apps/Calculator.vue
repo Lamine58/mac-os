@@ -5,6 +5,10 @@
     :force-focus="forceFocus"
     :initial-x="200"
     :initial-y="150"
+    :initial-width="328"
+    :initial-height="662"
+    :min-width="328"
+    :min-height="662"
     @close="$emit('close')"
   >
     <div class="calculator-content">
@@ -131,31 +135,34 @@ const backspace = () => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .calculator-display {
   padding: 20px;
-  background: #000;
+  background: var(--bg-window-content);
   text-align: right;
   min-height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  transition: background-color 0.3s ease;
 }
 
 .calculator-history {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   margin-bottom: 10px;
   min-height: 20px;
+  transition: color 0.3s ease;
 }
 
 .calculator-result {
   font-size: 48px;
-  color: white;
+  color: var(--text-color);
   font-weight: 300;
   word-break: break-all;
+  transition: color 0.3s ease;
 }
 
 .calculator-buttons {
@@ -163,34 +170,38 @@ const backspace = () => {
   grid-template-columns: repeat(4, 1fr);
   gap: 1px;
   flex: 1;
-  background: #333;
+  background: var(--border-color);
+  transition: background-color 0.3s ease;
 }
 
 .calc-btn {
-  background: #2e2e2e;
+  background: var(--bg-sidebar);
   border: none;
-  color: white;
+  color: var(--text-color);
   font-size: 24px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.3s ease, color 0.3s ease;
   font-weight: 300;
 }
 
 .calc-btn:hover {
-  background: #3e3e3e;
+  background: var(--hover-bg);
 }
 
 .calc-btn:active {
-  background: #4e4e4e;
+  background: var(--hover-bg);
+  opacity: 0.8;
 }
 
 .calc-btn.number {
-  background: #252525;
+  background: var(--bg-window);
+  transition: background-color 0.3s ease;
 }
 
 .calc-btn.operator {
   background: #ff9500;
-  color: white;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
 }
 
 .calc-btn.operator:hover {
@@ -198,14 +209,16 @@ const backspace = () => {
 }
 
 .calc-btn.function {
-  background: #1a1a1a;
-  color: rgba(255, 255, 255, 0.8);
+  background: var(--bg-window-toolbar);
+  color: var(--text-color-secondary);
   font-size: 18px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .calc-btn.equals {
   background: #ff9500;
-  color: white;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
 }
 
 .calc-btn.zero {

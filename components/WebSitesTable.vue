@@ -1,7 +1,7 @@
 <template>
   <div class="websites-container">
     <div v-if="filteredWebsites.length === 0 && props.searchQuery" class="no-results">
-      <p>Aucun résultat trouvé pour "{{ props.searchQuery }}"</p>
+      <p class="no-results-text">Aucun résultat trouvé pour "{{ props.searchQuery }}"</p>
     </div>
     <div 
       v-for="site in filteredWebsites" 
@@ -74,8 +74,8 @@ const filteredWebsites = computed(() => {
 }
 
 .website-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -85,9 +85,10 @@ const filteredWebsites = computed(() => {
 }
 
 .website-card:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--text-color-secondary);
 }
 
 .website-icon {
@@ -100,17 +101,19 @@ const filteredWebsites = computed(() => {
 }
 
 .website-name {
-  color: #fff;
+  color: var(--text-color);
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 8px 0;
+  transition: color 0.3s ease;
 }
 
 .website-url {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   font-size: 12px;
   margin: 0 0 15px 0;
   word-break: break-all;
+  transition: color 0.3s ease;
 }
 
 .website-link {
@@ -137,8 +140,9 @@ const filteredWebsites = computed(() => {
   grid-column: 1 / -1;
   text-align: center;
   padding: 40px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   font-size: 14px;
+  transition: color 0.3s ease;
 }
 </style>
 

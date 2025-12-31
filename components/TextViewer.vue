@@ -88,24 +88,26 @@ onMounted(async () => {
   width: 80%;
   max-width: 900px;
   height: 80%;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-window);
   backdrop-filter: blur(10px);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   animation: zoomInMac 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .text-viewer-header {
   display: flex;
   align-items: center;
   padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-window-header);
+  border-bottom: 1px solid var(--border-color);
   position: relative;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .text-viewer-traffic-lights {
@@ -140,7 +142,7 @@ onMounted(async () => {
 }
 
 .text-viewer-title {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   font-size: 14px;
   font-weight: 500;
   flex: 1;
@@ -149,13 +151,16 @@ onMounted(async () => {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
+  transition: color 0.3s ease;
 }
 
 .text-viewer-body {
   flex: 1;
   overflow: auto;
   padding: 30px;
-  color: rgba(255, 255, 255, 0.9);
+  background: var(--bg-window-content);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .text-viewer-text {
@@ -165,7 +170,8 @@ onMounted(async () => {
   white-space: pre-wrap;
   word-wrap: break-word;
   margin: 0;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .text-viewer-loading,
@@ -175,20 +181,25 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   text-align: center;
+  transition: color 0.3s ease;
 }
 
 .text-viewer-loading i {
   font-size: 32px;
   margin-bottom: 15px;
   animation: spin 1s linear infinite;
+  color: var(--text-color-secondary);
+  transition: color 0.3s ease;
 }
 
 .text-viewer-error i {
   font-size: 48px;
   margin-bottom: 15px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
+  opacity: 0.6;
+  transition: color 0.3s ease;
 }
 
 @keyframes spin {

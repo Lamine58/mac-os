@@ -3,8 +3,8 @@
     :title="'Keynote'"
     :is-open="isOpen"
     :force-focus="forceFocus"
-    :initial-width="1000"
-    :initial-height="700"
+    :initial-width="800"
+    :initial-height="600"
     @close="$emit('close')"
   >
     <div class="keynote-content">
@@ -140,7 +140,7 @@ const closePresentation = () => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 
@@ -148,7 +148,7 @@ const closePresentation = () => {
 .keynote-main {
   flex: 1;
   overflow-y: auto;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 /* Vue des présentations */
@@ -163,7 +163,7 @@ const closePresentation = () => {
 .presentations-header h2 {
   font-size: 24px;
   font-weight: 600;
-  color: white;
+  color: var(--text-color);
   margin: 0;
 }
 
@@ -174,7 +174,7 @@ const closePresentation = () => {
 }
 
 .presentation-card {
-  background: #252525;
+  background: var(--bg-sidebar);
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
@@ -182,18 +182,20 @@ const closePresentation = () => {
 }
 
 .presentation-card:hover {
-  background: #2d2d2d;
+  background: var(--hover-bg);
   transform: translateY(-2px);
+  transition: background-color 0.3s ease, transform 0.2s;
 }
 
 .presentation-thumbnail {
   width: 100%;
-  aspect-ratio: 16/9;
-  background: #1a1a1a;
+  /* aspect-ratio: 16/9; */
+  background: var(--bg-window);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 .presentation-thumbnail img {
@@ -209,7 +211,7 @@ const closePresentation = () => {
 .presentation-name {
   font-size: 14px;
   font-weight: 500;
-  color: white;
+  color: var(--text-color);
   margin-bottom: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -218,7 +220,7 @@ const closePresentation = () => {
 
 .presentation-date {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
 }
 
 
@@ -227,7 +229,7 @@ const closePresentation = () => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .editor-header {
@@ -235,14 +237,14 @@ const closePresentation = () => {
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background: #252525;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .editor-title {
   font-size: 15px;
   font-weight: 600;
-  color: white;
+  color: var(--text-color);
 }
 
 .close-editor {
@@ -251,7 +253,7 @@ const closePresentation = () => {
   border: none;
   background: transparent;
   border-radius: 6px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   font-size: 16px;
   cursor: pointer;
   display: flex;
@@ -261,8 +263,8 @@ const closePresentation = () => {
 }
 
 .close-editor:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: var(--hover-bg);
+  color: var(--text-color);
 }
 
 .editor-content {
@@ -278,7 +280,7 @@ const closePresentation = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #252525;
+  background: var(--bg-sidebar);
   border-radius: 8px;
   padding: 40px;
 }
@@ -287,7 +289,7 @@ const closePresentation = () => {
   width: 100%;
   max-width: 800px;
   aspect-ratio: 16/9;
-  background: white;
+  background: var(--text-color);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -303,14 +305,16 @@ const closePresentation = () => {
 .slide-content h1 {
   font-size: 48px;
   font-weight: 700;
-  color: #1d1d1f;
+  color: var(--bg-window-content);
   margin: 0 0 20px 0;
+  transition: color 0.3s ease;
 }
 
 .slide-content p {
   font-size: 24px;
-  color: #86868b;
+  color: var(--text-color-secondary);
   margin: 0;
+  transition: color 0.3s ease;
 }
 
 .slide-thumbnails {
@@ -322,7 +326,7 @@ const closePresentation = () => {
 }
 
 .slide-thumb {
-  background: #252525;
+  background: var(--bg-sidebar);
   border-radius: 6px;
   padding: 12px;
   cursor: pointer;
@@ -331,7 +335,8 @@ const closePresentation = () => {
 }
 
 .slide-thumb:hover {
-  background: #2d2d2d;
+  background: var(--hover-bg);
+  transition: background-color 0.3s ease;
 }
 
 .slide-thumb.active {
@@ -342,7 +347,7 @@ const closePresentation = () => {
 .thumb-number {
   font-size: 11px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   margin-bottom: 6px;
 }
 
@@ -352,7 +357,7 @@ const closePresentation = () => {
 
 .thumb-content {
   font-size: 13px;
-  color: white;
+  color: var(--text-color);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -364,7 +369,7 @@ const closePresentation = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #252525;
+  background: var(--bg-sidebar);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -373,6 +378,6 @@ const closePresentation = () => {
   width: 100%;
   height: 100%;
   min-height: 500px;
-  background: white;
+  background: var(--text-color);
 }
 </style>

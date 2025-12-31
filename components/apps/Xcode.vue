@@ -3,8 +3,8 @@
     :title="'Xcode'"
     :is-open="isOpen"
     :force-focus="forceFocus"
-    :initial-width="900"
-    :initial-height="700"
+    :initial-width="728"
+    :initial-height="599"
     @close="$emit('close')"
   >
     <div class="xcode-content">
@@ -85,7 +85,7 @@ const openProject = () => {
   align-items: center;
   justify-content: center;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
   padding: 40px;
 }
 
@@ -98,7 +98,7 @@ const openProject = () => {
 .xcode-icon {
   width: 120px;
   height: 120px;
-  margin: 0 auto 30px;
+  margin: 0 auto 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,43 +111,45 @@ const openProject = () => {
 }
 
 .xcode-title {
-  font-size: 42px;
+  font-size: 32px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-color);
   margin: 0 0 12px 0;
   letter-spacing: -0.5px;
+  transition: color 0.3s ease;
 }
 
 .xcode-version {
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.6);
-  margin: 0 0 50px 0;
+  color: var(--text-color-secondary);
+  margin: 0;
 }
 
 .xcode-options {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .xcode-option {
   display: flex;
   align-items: flex-start;
   gap: 20px;
-  padding: 24px;
-  background: #252525;
+  padding: 15px;
+  background: var(--bg-sidebar);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   cursor: pointer;
   transition: all 0.2s;
   text-align: left;
 }
 
 .xcode-option:hover {
-  background: #2d2d2d;
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
+  border-color: var(--border-color);
   transform: translateY(-2px);
+  transition: background-color 0.3s ease, transform 0.2s;
 }
 
 .option-icon {
@@ -163,7 +165,8 @@ const openProject = () => {
 
 .option-icon i {
   font-size: 24px;
-  color: white;
+  color: #ffffff;
+  transition: color 0.3s ease;
 }
 
 .option-content {
@@ -173,13 +176,14 @@ const openProject = () => {
 .option-title {
   font-size: 18px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-color);
   margin: 0 0 8px 0;
+  transition: color 0.3s ease;
 }
 
 .option-subtitle {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   margin: 0;
   line-height: 1.5;
 }

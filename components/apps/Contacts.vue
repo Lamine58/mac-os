@@ -84,7 +84,7 @@
         </div>
 
         <div v-else class="no-contact">
-          <i class="bi bi-person" style="font-size: 64px; color: rgba(255, 255, 255, 0.3);"></i>
+          <i class="bi bi-person" style="font-size: 64px; color: var(--text-color-secondary); opacity: 0.3;"></i>
           <p>Sélectionnez un contact</p>
         </div>
       </div>
@@ -199,36 +199,40 @@ if (contacts.value.length > 0) {
 .contacts-content {
   display: flex;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 /* Sidebar */
 .contacts-sidebar {
   width: 280px;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  background: #252525;
+  background: var(--bg-sidebar);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .sidebar-header {
   padding: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
 .search-input {
   width: 100%;
   padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: white;
+  color: var(--text-color);
   font-size: 14px;
   outline: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .search-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
 }
 
 .contacts-list {
@@ -241,12 +245,12 @@ if (contacts.value.length > 0) {
   align-items: center;
   padding: 12px;
   cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: background 0.2s;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.2s, border-color 0.3s ease;
 }
 
 .contact-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
 }
 
 .contact-item.active {
@@ -265,9 +269,10 @@ if (contacts.value.length > 0) {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: 600;
+  color: var(--text-color);
+  font-weight: 200;
   font-size: 18px;
+  transition: color 0.3s ease;
   overflow: hidden;
 }
 
@@ -290,9 +295,10 @@ if (contacts.value.length > 0) {
 }
 
 .contact-name {
-  font-weight: 600;
+  font-weight: 200;
   font-size: 15px;
-  color: white;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 /* Zone principale */
@@ -300,7 +306,8 @@ if (contacts.value.length > 0) {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 .contact-view {
@@ -313,9 +320,10 @@ if (contacts.value.length > 0) {
   display: flex;
   align-items: center;
   padding: 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: #252525;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-sidebar);
   gap: 20px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .contact-header-avatar {
@@ -327,9 +335,10 @@ if (contacts.value.length > 0) {
 }
 
 .contact-header-name {
-  font-weight: 600;
+  font-weight: 200;
   font-size: 28px;
-  color: white;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .contact-details {
@@ -345,15 +354,17 @@ if (contacts.value.length > 0) {
 .detail-label {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  transition: color 0.3s ease;
 }
 
 .detail-value {
   font-size: 18px;
-  color: white;
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 .phone-link,
@@ -374,7 +385,8 @@ if (contacts.value.length > 0) {
   gap: 12px;
   margin-top: 40px;
   padding-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
 .action-button {
@@ -382,9 +394,9 @@ if (contacts.value.length > 0) {
   padding: 12px 20px;
   border: none;
   border-radius: 8px;
-  color: white;
+  color: #ffffff;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 200;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -423,7 +435,7 @@ if (contacts.value.length > 0) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
 }
 
 .no-contact p {

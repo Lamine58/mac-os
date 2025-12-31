@@ -144,14 +144,14 @@ watch(() => props.isOpen, (isOpen) => {
 .keychain-content {
   display: flex;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 /* Sidebar */
 .keychain-sidebar {
   width: 200px;
-  background: #252525;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
   padding: 20px 0;
 }
 
@@ -165,7 +165,7 @@ watch(() => props.isOpen, (isOpen) => {
   gap: 12px;
   padding: 12px;
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   font-size: 14px;
   cursor: pointer;
   transition: background 0.2s;
@@ -173,7 +173,7 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .sidebar-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .sidebar-item.active {
@@ -197,7 +197,7 @@ watch(() => props.isOpen, (isOpen) => {
 
 .keychain-header {
   padding: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .search-container {
@@ -210,17 +210,17 @@ watch(() => props.isOpen, (isOpen) => {
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   font-size: 16px;
 }
 
 .search-input {
   width: 100%;
   padding: 10px 12px 10px 40px;
-  background: #252525;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: white;
+  color: var(--text-color);
   font-size: 14px;
   outline: none;
 }
@@ -238,8 +238,8 @@ watch(() => props.isOpen, (isOpen) => {
 .password-list {
   width: 300px;
   overflow-y: auto;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  background: #1e1e1e;
+  border-right: 1px solid var(--border-color);
+  background: var(--bg-window-content);
 }
 
 .password-item {
@@ -249,15 +249,15 @@ watch(() => props.isOpen, (isOpen) => {
   padding: 16px 20px;
   cursor: pointer;
   transition: background 0.2s;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .password-item:hover {
-  background: #252525;
+  background: var(--bg-sidebar);
 }
 
 .password-item:active {
-  background: #2d2d2d;
+  background: var(--hover-bg);
 }
 
 .password-icon {
@@ -266,14 +266,14 @@ watch(() => props.isOpen, (isOpen) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #252525;
+  background: var(--bg-sidebar);
   border-radius: 8px;
   flex-shrink: 0;
 }
 
 .password-icon i {
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
 }
 
 .password-info {
@@ -284,13 +284,13 @@ watch(() => props.isOpen, (isOpen) => {
 .password-name {
   font-size: 15px;
   font-weight: 500;
-  color: white;
+  color: var(--text-color);
   margin-bottom: 4px;
 }
 
 .password-account {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
 }
 
 /* Password Detail */
@@ -298,7 +298,7 @@ watch(() => props.isOpen, (isOpen) => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .detail-header {
@@ -306,16 +306,16 @@ watch(() => props.isOpen, (isOpen) => {
   align-items: center;
   gap: 16px;
   padding: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .back-btn {
   width: 36px;
   height: 36px;
   border: none;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   font-size: 18px;
   cursor: pointer;
   display: flex;
@@ -325,14 +325,14 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .back-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
+  background: var(--hover-bg);
+  color: var(--text-color);
 }
 
 .detail-header h2 {
   font-size: 24px;
   font-weight: 600;
-  color: white;
+  color: var(--text-color);
   margin: 0;
 }
 
@@ -349,7 +349,7 @@ watch(() => props.isOpen, (isOpen) => {
   display: block;
   font-size: 13px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
@@ -357,11 +357,11 @@ watch(() => props.isOpen, (isOpen) => {
 
 .field-value {
   font-size: 16px;
-  color: white;
+  color: var(--text-color);
   padding: 12px;
-  background: #252525;
+  background: var(--bg-sidebar);
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .password-field {
@@ -372,10 +372,10 @@ watch(() => props.isOpen, (isOpen) => {
 .password-input {
   flex: 1;
   padding: 12px;
-  background: #252525;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: white;
+  color: var(--text-color);
   font-size: 16px;
   font-family: 'Monaco', 'Menlo', monospace;
   outline: none;
@@ -389,10 +389,10 @@ watch(() => props.isOpen, (isOpen) => {
   width: 44px;
   height: 44px;
   border: none;
-  background: #252525;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   font-size: 18px;
   cursor: pointer;
   display: flex;

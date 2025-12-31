@@ -4,8 +4,10 @@
     :is-open="isOpen"
     :force-focus="forceFocus"
     :hide-maximize="true"
-    :initial-width="393"
-    :initial-height="852"
+    :initial-width="328"
+    :initial-height="662"
+    :min-width="328"
+    :min-height="662"
     @close="$emit('close')"
   >
     <div class="home-content">

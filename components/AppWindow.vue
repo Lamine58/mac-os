@@ -7,8 +7,10 @@
       :style="{ 
         left: position.x + 'px', 
         top: position.y + 'px', 
-        width: windowWidth + 'px',
-        height: windowHeight + 'px',
+        width: constrainedWidth + 'px',
+        height: constrainedHeight + 'px',
+        minWidth: minWidth + 'px',
+        minHeight: minHeight + 'px',
         zIndex: zIndex 
       }"
       @mousedown="focusWindow"
@@ -64,6 +66,8 @@ const props = defineProps<{
   hideMaximize?: boolean // Masquer le bouton agrandir
   initialWidth?: number // Largeur initiale de la fenêtre
   initialHeight?: number // Hauteur initiale de la fenêtre
+  minWidth?: number // Largeur minimale personnalisée
+  minHeight?: number // Hauteur minimale personnalisée
 }>()
 
 const emit = defineEmits<{
@@ -78,6 +82,12 @@ const { getNextPosition, removeWindow } = useWindowPosition()
 // Générer un ID unique pour cette fenêtre si non fourni
 const windowId = computed(() => props.windowId || props.title.toLowerCase().replace(/\s+/g, '-'))
 
+const DEFAULT_MIN_WIDTH = 728
+const DEFAULT_MIN_HEIGHT = 599
+
+const minWidth = computed(() => props.minWidth || DEFAULT_MIN_WIDTH)
+const minHeight = computed(() => props.minHeight || DEFAULT_MIN_HEIGHT)
+
 const windowWidth = ref(props.initialWidth || 800)
 const windowHeight = ref(props.initialHeight || 600)
 const position = ref({ 
@@ -86,6 +96,10 @@ const position = ref({
 })
 const originalPosition = ref({ x: props.initialX || 150, y: props.initialY || 100 })
 const originalSize = ref({ width: props.initialWidth || 800, height: props.initialHeight || 600 })
+
+// Computed properties pour garantir les valeurs minimales
+const constrainedWidth = computed(() => Math.max(minWidth.value, windowWidth.value))
+const constrainedHeight = computed(() => Math.max(minHeight.value, windowHeight.value))
 // Initialiser avec un z-index bas, il sera mis à jour quand la fenêtre s'ouvre
 const zIndex = ref(4000)
 const isWindowDragging = ref(false)
@@ -229,25 +243,25 @@ onMounted(() => {
     if (isResizing.value) {
       const deltaX = e.clientX - resizeStartX.value
       const deltaY = e.clientY - resizeStartY.value
-      const minWidth = 728
-      const minHeight = 499
+      const currentMinWidth = minWidth.value
+      const currentMinHeight = minHeight.value
       
       if (resizeDirection.value.includes('right')) {
-        windowWidth.value = Math.max(minWidth, resizeStartWidth.value + deltaX)
+        windowWidth.value = Math.max(currentMinWidth, resizeStartWidth.value + deltaX)
       }
       if (resizeDirection.value.includes('left')) {
-        const newWidth = Math.max(minWidth, resizeStartWidth.value - deltaX)
-        if (newWidth > minWidth) {
+        const newWidth = Math.max(currentMinWidth, resizeStartWidth.value - deltaX)
+        if (newWidth >= currentMinWidth) {
           position.value.x = resizeStartLeft.value + (resizeStartWidth.value - newWidth)
           windowWidth.value = newWidth
         }
       }
       if (resizeDirection.value.includes('bottom')) {
-        windowHeight.value = Math.max(minHeight, resizeStartHeight.value + deltaY)
+        windowHeight.value = Math.max(currentMinHeight, resizeStartHeight.value + deltaY)
       }
       if (resizeDirection.value.includes('top')) {
-        const newHeight = Math.max(minHeight, resizeStartHeight.value - deltaY)
-        if (newHeight > minHeight) {
+        const newHeight = Math.max(currentMinHeight, resizeStartHeight.value - deltaY)
+        if (newHeight >= currentMinHeight) {
           position.value.y = resizeStartTop.value + (resizeStartHeight.value - newHeight)
           windowHeight.value = newHeight
         }
@@ -283,16 +297,16 @@ onMounted(() => {
   position: fixed;
   width: 800px;
   height: 600px;
-  background-color: #2e2e2e;
+  background-color: var(--bg-window);
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   display: none;
   flex-direction: column;
   overflow: hidden;
-  color: white;
+  color: var(--text-color);
   transform: scale(0.95);
   opacity: 0;
-  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out, background-color 0.3s ease, color 0.3s ease;
 }
 
 .app-window.open {
@@ -311,14 +325,15 @@ onMounted(() => {
 
 .window-header {
   height: 40px;
-  background-color: #2e2e2e;
+  background-color: var(--bg-window-header);
   display: flex;
   align-items: center;
   padding: 0 10px;
   position: relative;
   user-select: none;
   cursor: grab;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .traffic-lights {
@@ -343,16 +358,18 @@ onMounted(() => {
   left: 50%;
   transform: translateX(-50%);
   font-weight: 500;
-  font-size: 14px;
-  color: #ccc;
+  font-size: 12px;
+  color: var(--text-color-secondary);
+  transition: color 0.3s ease;
 }
 
 .window-content {
   flex: 1;
   overflow: auto;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
   display: flex;
   flex-direction: column;
+  transition: background-color 0.3s ease;
 }
 
 /* Bordures pour le redimensionnement */

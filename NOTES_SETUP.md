@@ -52,3 +52,4 @@ Si vous ne configurez pas JSONBin.io, le système utilisera automatiquement le *
 Si vous préférez utiliser un autre service (Firebase, Supabase, etc.), vous pouvez modifier le composable `useNotesStorage.ts` pour utiliser l'API de votre choix.
 
 
+

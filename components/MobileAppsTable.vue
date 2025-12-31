@@ -1,7 +1,7 @@
 <template>
   <div class="mobile-apps-container">
     <div v-if="filteredApps.length === 0 && props.searchQuery" class="no-results">
-      <p>Aucun résultat trouvé pour "{{ props.searchQuery }}"</p>
+      <p class="no-results-text">Aucun résultat trouvé pour "{{ props.searchQuery }}"</p>
     </div>
     <div 
       v-for="app in filteredApps" 
@@ -137,8 +137,8 @@ const filteredApps = computed(() => {
 }
 
 .mobile-app-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 20px;
   display: flex;
@@ -148,9 +148,10 @@ const filteredApps = computed(() => {
 }
 
 .mobile-app-card:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: var(--text-color-secondary);
 }
 
 .app-icon {
@@ -163,17 +164,19 @@ const filteredApps = computed(() => {
 }
 
 .app-name {
-  color: #fff;
+  color: var(--text-color);
   font-size: 18px;
   font-weight: 600;
   margin: 0 0 10px 0;
+  transition: color 0.3s ease;
 }
 
 .app-description {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   font-size: 13px;
   line-height: 1.5;
   margin: 0 0 15px 0;
+  transition: color 0.3s ease;
 }
 
 .app-links {
@@ -217,18 +220,20 @@ const filteredApps = computed(() => {
 }
 
 .app-link.disabled {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
+  color: var(--text-color-secondary);
+  border: 1px solid var(--border-color);
   cursor: not-allowed;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .no-results {
   grid-column: 1 / -1;
   text-align: center;
   padding: 40px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   font-size: 14px;
+  transition: color 0.3s ease;
 }
 </style>
 

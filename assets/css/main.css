@@ -1,4 +1,56 @@
 /* General Setup */
+/* Variables CSS pour les thèmes */
+:root {
+  /* Dark mode (par défaut) */
+  --bg-desktop: #333;
+  --bg-menu-bar: rgba(0, 0, 0, 0.4);
+  --bg-widget: rgba(255, 255, 255, 0.25);
+  --bg-dock: rgba(255, 255, 255, 0.15);
+  --text-color: #fff;
+  --text-color-secondary: rgba(255, 255, 255, 0.8);
+  --bg-window: #2e2e2e;
+  --bg-window-header: #2e2e2e;
+  --bg-window-toolbar: #252525;
+  --bg-window-content: #1e1e1e;
+  --bg-sidebar: #252525;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --hover-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* Light mode */
+.theme-light {
+  --bg-desktop: #e8e8e8;
+  --bg-menu-bar: rgba(255, 255, 255, 0.45);
+  --bg-widget: rgba(255, 255, 255, 0.7);
+  --bg-dock: rgba(255, 255, 255, 0.5);
+  --text-color: #1d1d1f;
+  --text-color-secondary: rgba(0, 0, 0, 0.65);
+  --bg-window: #f5f5f7;
+  --bg-window-header: #f5f5f7;
+  --bg-window-toolbar: #f0f0f2;
+  --bg-window-content: #ffffff;
+  --bg-sidebar: #f5f5f7;
+  --border-color: rgba(0, 0, 0, 0.12);
+  --hover-bg: rgba(0, 0, 0, 0.08);
+}
+
+/* Dark mode (explicite) */
+.theme-dark {
+  --bg-desktop: #333;
+  --bg-menu-bar: rgba(0, 0, 0, 0.4);
+  --bg-widget: rgba(255, 255, 255, 0.25);
+  --bg-dock: rgba(255, 255, 255, 0.15);
+  --text-color: #fff;
+  --text-color-secondary: rgba(255, 255, 255, 0.8);
+  --bg-window: #2e2e2e;
+  --bg-window-header: #2e2e2e;
+  --bg-window-toolbar: #252525;
+  --bg-window-content: #1e1e1e;
+  --bg-sidebar: #252525;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --hover-bg: rgba(255, 255, 255, 0.1);
+}
+
 /* Définition de l'animation de fondu */
 @keyframes fadeIn {
     from { 
@@ -46,8 +98,9 @@ body, html {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background-color: #333;
-    color: white;
+    background-color: var(--bg-desktop);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Background Image Simulation */
@@ -67,14 +120,15 @@ body, html {
     left: 0;
     width: 100%;
     height: 24px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: var(--bg-menu-bar);
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     padding: 0 10px;
     z-index: 10;
     font-size: 13px;
-    color: #fff;
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .menu-item {
@@ -113,12 +167,13 @@ body, html {
 .widget {
     padding: 15px;
     border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.25); 
+    background-color: var(--bg-widget); 
     backdrop-filter: blur(20px) saturate(180%);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: white;
+    color: var(--text-color);
     font-weight: 500;
     overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Calendar Widget */
@@ -256,10 +311,11 @@ body, html {
     padding: 3px;
     border-radius: 10px;
     margin-bottom: 15px; 
-    background-color: rgba(255, 255, 255, 0.15); 
+    background-color: var(--bg-dock); 
     backdrop-filter: blur(20px) saturate(180%);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 10;
+    z-index: 20000;
+    transition: background-color 0.3s ease;
 }
 
 .dock-icon-group {
@@ -291,12 +347,24 @@ body, html {
 }
 
 .dock.dock-hidden {
-    transform: translateX(-50%) translateY(calc(100% - 20px));
-    transition: transform 0.3s ease-in-out;
+    transform: translateX(-50%) translateY(calc(100% - 10px));
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dock.dock-visible {
+    transform: translateX(-50%) translateY(0);
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1), opacity 0.4s cubic-bezier(0.2, 0, 0, 1);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .dock.dock-hidden:hover {
     transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), opacity 0.3s ease-in;
 }
 
 .dock-icon.active-app::after {
@@ -326,24 +394,27 @@ body, html {
 
 .file-list-table th {
     background-color: transparent;
-    color: #ccc;
+    color: var(--text-color-secondary);
     text-align: left;
     padding: 8px 10px;
     font-weight: 500;
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid var(--border-color);
     cursor: pointer;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .file-list-table td {
     padding: 8px 10px;
-    border-bottom: 1px solid #383838;
+    border-bottom: 1px solid var(--border-color);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: border-color 0.3s ease;
 }
 
 .file-list-table tbody tr:hover {
-    background-color: #353535;
+    background-color: var(--hover-bg);
+    transition: background-color 0.3s ease;
 }
 
 .col-icon-name {
@@ -362,17 +433,17 @@ body, html {
     left: 150px;
     width: 950px; 
     height: 500px;
-    background-color: #2e2e2e; 
+    background-color: var(--bg-window); 
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     display: none; 
     flex-direction: column;
     overflow: hidden;
     z-index: 2000; 
-    color: white; 
+    color: var(--text-color); 
     transform: scale(0.95);
     opacity: 0;
-    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out, background-color 0.3s ease, color 0.3s ease;
 }
 
 .finder-window.open {
@@ -470,14 +541,15 @@ body, html {
 
 .window-header {
     height: 40px;
-    background-color: #2e2e2e; 
+    background-color: var(--bg-window-header); 
     display: flex;
     align-items: center;
     padding: 0 10px;
     position: relative;
     user-select: none; 
     cursor: grab;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .traffic-lights {
@@ -503,30 +575,34 @@ body, html {
     transform: translateX(-50%);
     font-weight: 500;
     font-size: 14px;
-    color: #ccc;
+    color: var(--text-color-secondary);
+    transition: color 0.3s ease;
 }
 
 .window-toolbar {
     height: 40px;
-    background-color: #252525;
+    background-color: var(--bg-window-toolbar);
     display: flex;
     align-items: center;
     padding: 0 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .toolbar-item {
     font-size: 15px;
-    color: #ccc;
+    color: var(--text-color-secondary);
     margin-right: 15px;
     cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .toolbar-path {
     font-size: 13px;
     font-style: italic;
-    color: #999;
+    color: var(--text-color-secondary);
+    transition: color 0.3s ease;
 }
 
 .toolbar-right {
@@ -536,17 +612,17 @@ body, html {
 .search-input {
     padding: 5px 10px;
     border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: #3e3e3e;
-    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border-color);
+    background-color: var(--hover-bg);
+    color: var(--text-color);
     font-size: 12px;
     outline: none;
-    transition: border-color 0.2s;
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .search-input:focus {
     border-color: #007aff;
-    background-color: #444;
+    background-color: var(--hover-bg);
 }
 
 .window-content {
@@ -554,7 +630,8 @@ body, html {
     flex: 1;
     min-height: 0;
     overflow: hidden;
-    background-color: #1e1e1e;
+    background-color: var(--bg-window-content);
+    transition: background-color 0.3s ease;
 }
 
 .sidebar {
@@ -562,18 +639,20 @@ body, html {
     min-width: 200px;
     max-width: 200px;
     flex-shrink: 0;
-    background-color: #252525; 
+    background-color: var(--bg-sidebar); 
     padding: 10px 0;
     overflow-y: auto;
-    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: 1px solid var(--border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .sidebar-header {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-color-secondary);
     padding: 5px 15px 5px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    transition: color 0.3s ease;
 }
 
 .sidebar-item {
@@ -582,13 +661,13 @@ body, html {
     padding: 8px 15px;
     margin: 2px 0;
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-color-secondary);
     cursor: pointer;
-    transition: background-color 0.15s;
+    transition: background-color 0.15s, color 0.3s ease;
 }
 
 .sidebar-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--hover-bg);
 }
 
 .sidebar-item.active {
@@ -607,7 +686,35 @@ body, html {
     padding: 15px;
     overflow-y: auto;
     overflow-x: auto;
-    background-color: #1e1e1e;
+    background-color: var(--bg-window-content);
+    transition: background-color 0.3s ease;
+}
+
+.no-results {
+    grid-column: 1 / -1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    min-height: 200px;
+}
+
+.no-results-text {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: var(--text-color-secondary) !important;
+    transition: color 0.3s ease;
+    font-size: 14px;
+}
+
+.theme-light .no-results-text {
+    color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.theme-dark .no-results-text {
+    color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .file-item {
@@ -661,8 +768,9 @@ td{
 }
 
 .folder-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--hover-bg);
     transform: scale(1.05);
+    transition: background-color 0.3s ease, transform 0.1s;
 }
 
 .folder-icon-large {
@@ -673,11 +781,20 @@ td{
 }
 
 .folder-name {
-    color: #fff;
+    color: var(--text-color) !important;
     font-size: 13px;
     text-align: center;
     word-break: break-word;
     max-width: 100px;
+    transition: color 0.3s ease;
+}
+
+.theme-light .folder-name {
+    color: #1d1d1f !important;
+}
+
+.theme-dark .folder-name {
+    color: #ffffff !important;
 }
 
 .toolbar-item.disabled {
@@ -1058,7 +1175,7 @@ td{
     }
 
     .toolbar-item:active {
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: var(--hover-bg);
     }
 }
 

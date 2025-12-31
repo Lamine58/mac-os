@@ -316,21 +316,21 @@ watch(() => props.isOpen, (isOpen) => {
 .facetime-content {
   display: flex;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 /* Sidebar */
 .facetime-sidebar {
   width: 280px;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  background: #252525;
+  background: var(--bg-sidebar);
 }
 
 .sidebar-header {
   padding: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .new-call-button {
@@ -339,9 +339,9 @@ watch(() => props.isOpen, (isOpen) => {
   background: #007AFF;
   border: none;
   border-radius: 8px;
-  color: white;
+  color: #ffffff;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 200;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -364,12 +364,12 @@ watch(() => props.isOpen, (isOpen) => {
   align-items: center;
   padding: 12px;
   cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
   transition: background 0.2s;
 }
 
 .call-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
 }
 
 .call-item.active {
@@ -388,8 +388,8 @@ watch(() => props.isOpen, (isOpen) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: 600;
+  color: var(--text-color);
+  font-weight: 200;
   font-size: 18px;
 }
 
@@ -417,20 +417,20 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .call-name {
-  font-weight: 600;
+  font-weight: 200;
   font-size: 15px;
-  color: white;
+  color: var(--text-color);
   margin-bottom: 4px;
 }
 
 .call-type {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
 }
 
 .call-time {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-color-secondary);
   margin-left: 8px;
   white-space: nowrap;
 }
@@ -440,7 +440,7 @@ watch(() => props.isOpen, (isOpen) => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 /* Vue de nouvel appel */
@@ -455,20 +455,20 @@ watch(() => props.isOpen, (isOpen) => {
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: #252525;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-sidebar);
 }
 
 .new-call-title {
-  font-weight: 600;
+  font-weight: 200;
   font-size: 15px;
-  color: white;
+  color: var(--text-color);
 }
 
 .close-new-call {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   font-size: 20px;
   cursor: pointer;
   padding: 4px 8px;
@@ -477,7 +477,7 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .close-new-call:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .new-call-form {
@@ -488,7 +488,8 @@ watch(() => props.isOpen, (isOpen) => {
   align-items: center;
   justify-content: center;
   gap: 40px;
-  background: linear-gradient(180deg, #1e1e1e 0%, #252525 100%);
+  background: linear-gradient(180deg, var(--bg-window-content) 0%, var(--bg-sidebar) 100%);
+  transition: background 0.3s ease;
 }
 
 .facetime-logo-container {
@@ -514,8 +515,8 @@ watch(() => props.isOpen, (isOpen) => {
 
 .call-field label {
   font-size: 14px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  font-weight: 200;
+  color: var(--text-color);
   text-align: left;
   width: 100%;
 }
@@ -530,7 +531,7 @@ watch(() => props.isOpen, (isOpen) => {
 .input-icon {
   position: absolute;
   left: 16px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   font-size: 18px;
   z-index: 1;
 }
@@ -538,10 +539,10 @@ watch(() => props.isOpen, (isOpen) => {
 .call-input {
   width: 100%;
   padding: 16px 16px 16px 48px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: var(--hover-bg);
+  border: 2px solid var(--border-color);
   border-radius: 12px;
-  color: white;
+  color: var(--text-color);
   font-size: 16px;
   font-family: inherit;
   outline: none;
@@ -549,12 +550,12 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .call-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-color-secondary);
 }
 
 .call-input:focus {
   border-color: #007AFF;
-  background: rgba(255, 255, 255, 0.12);
+  background: var(--hover-bg);
 }
 
 .call-actions {
@@ -570,9 +571,9 @@ watch(() => props.isOpen, (isOpen) => {
   padding: 16px 24px;
   border: none;
   border-radius: 12px;
-  color: white;
+  color: #ffffff;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 200;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -628,13 +629,13 @@ watch(() => props.isOpen, (isOpen) => {
 
 .call-status {
   font-size: 24px;
-  font-weight: 600;
-  color: white;
+  font-weight: 200;
+  color: var(--text-color);
 }
 
 .call-duration {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   font-variant-numeric: tabular-nums;
 }
 
@@ -652,7 +653,7 @@ watch(() => props.isOpen, (isOpen) => {
   height: 56px;
   border-radius: 50%;
   border: none;
-  color: white;
+  color: var(--text-color);
   font-size: 24px;
   cursor: pointer;
   display: flex;
@@ -662,19 +663,19 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .control-button.mute {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
 }
 
 .control-button.mute:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--hover-bg);
 }
 
 .control-button.video-toggle {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
 }
 
 .control-button.video-toggle:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--hover-bg);
 }
 
 .control-button.end-call {
@@ -693,7 +694,7 @@ watch(() => props.isOpen, (isOpen) => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   gap: 20px;
 }
 

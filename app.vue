@@ -2,6 +2,23 @@
   <NuxtPage />
 </template>
 
+<script setup lang="ts">
+// Initialiser le thème avant le rendu
+if (process.client) {
+  const STORAGE_KEY = 'macos-theme-mode'
+  const stored = localStorage.getItem(STORAGE_KEY) || 'dark'
+  const isDark = stored === 'dark' || (stored === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  
+  if (isDark) {
+    document.documentElement.classList.add('theme-dark')
+    document.documentElement.classList.remove('theme-light')
+  } else {
+    document.documentElement.classList.add('theme-light')
+    document.documentElement.classList.remove('theme-dark')
+  }
+}
+</script>
+
 <style>
   * {
     box-sizing: border-box;

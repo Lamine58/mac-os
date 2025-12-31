@@ -1,5 +1,5 @@
 <template>
-  <div class="desktop" :style="{ '--base-url': baseURL }">
+  <div class="desktop" :class="{ 'theme-dark': isDark, 'theme-light': !isDark }" :style="{ '--base-url': baseURL }">
     <div class="background-content"></div>
 
     <MenuBar @open-app="openApp" />
@@ -69,6 +69,7 @@ definePageMeta({
 const currentFolder = ref('')
 const config = useRuntimeConfig()
 const baseURL = config.public.baseURL || '/mac-os/'
+const { isDark } = useTheme()
 
 const apps = ref({
   finder: false,

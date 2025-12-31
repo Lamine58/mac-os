@@ -4,7 +4,9 @@
     :is-open="isOpen"
     :force-focus="forceFocus"
     :initial-width="1000"
-    :initial-height="700"
+    :initial-height="650"
+    :min-width="950"
+    :min-height="650"
     @close="$emit('close')"
   >
     <div class="settings-content">
@@ -42,15 +44,15 @@
                 <div class="option-control">
                   <div class="radio-group">
                     <label class="radio-option">
-                      <input type="radio" name="appearance" value="light" checked>
+                      <input type="radio" name="appearance" value="light" v-model="themeMode" @change="setTheme('light')">
                       <span>Clair</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" name="appearance" value="dark">
+                      <input type="radio" name="appearance" value="dark" v-model="themeMode" @change="setTheme('dark')">
                       <span>Sombre</span>
                     </label>
                     <label class="radio-option">
-                      <input type="radio" name="appearance" value="auto">
+                      <input type="radio" name="appearance" value="auto" v-model="themeMode" @change="setTheme('auto')">
                       <span>Automatique</span>
                     </label>
                   </div>
@@ -292,6 +294,7 @@ const emit = defineEmits<{
 
 const { getAssetPath } = useAssetPath()
 const { dockSize, dockAutoHide, dockMagnification } = useDockSettings()
+const { themeMode, setTheme } = useTheme()
 
 const selectedCategory = ref('general')
 const selectedAccent = ref('#007AFF')
@@ -327,14 +330,14 @@ const accentColors = [
 .settings-content {
   display: flex;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 /* Sidebar */
 .settings-sidebar {
   width: 240px;
-  background: #252525;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
   padding: 20px 0;
   overflow-y: auto;
 }
@@ -349,7 +352,7 @@ const accentColors = [
   gap: 12px;
   padding: 10px 12px;
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   font-size: 14px;
   cursor: pointer;
   transition: background 0.15s;
@@ -357,7 +360,7 @@ const accentColors = [
 }
 
 .sidebar-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .sidebar-item.active {
@@ -376,19 +379,21 @@ const accentColors = [
 .settings-main {
   flex: 1;
   overflow-y: auto;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 .settings-header {
   padding: 30px 40px 20px;
-  background: #252525;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .settings-header h1 {
   font-size: 28px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-color);
   margin: 0;
   letter-spacing: -0.3px;
 }
@@ -402,18 +407,19 @@ const accentColors = [
 }
 
 .settings-group {
-  background: #252525;
+  background: var(--bg-sidebar);
   border-radius: 12px;
+  transition: background-color 0.3s ease;
   padding: 24px;
   margin-bottom: 24px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .settings-group h2 {
   font-size: 13px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.3px;
   margin: 0 0 16px 0;
@@ -437,8 +443,9 @@ const accentColors = [
 
 .option-label span {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   font-weight: 400;
+  transition: color 0.3s ease;
 }
 
 .option-control {
@@ -460,8 +467,9 @@ const accentColors = [
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   font-size: 14px;
+  transition: color 0.3s ease;
 }
 
 .radio-option input[type="radio"] {
@@ -519,8 +527,9 @@ const accentColors = [
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #d1d1d6;
-  transition: 0.3s;
+  background-color: var(--hover-bg);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
   border-radius: 30px;
 }
 
@@ -531,18 +540,35 @@ const accentColors = [
   width: 22px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
-  transition: 0.3s;
+  background-color: #ffffff;
+  transition: transform 0.3s ease, background-color 0.3s ease;
   border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 .toggle-switch input:checked + .toggle-slider {
   background-color: #34C759;
+  border-color: #34C759;
 }
 
 .toggle-switch input:checked + .toggle-slider:before {
   transform: translateX(20px);
+  background-color: #ffffff;
+}
+
+.theme-light .toggle-slider {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.theme-light .toggle-slider:before {
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.theme-light .toggle-switch input:checked + .toggle-slider {
+  background-color: #34C759;
+  border-color: #34C759;
 }
 
 /* Slider */
@@ -557,30 +583,33 @@ const accentColors = [
   flex: 1;
   height: 4px;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
   outline: none;
   accent-color: #007AFF;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .slider-value {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   font-size: 13px;
   min-width: 45px;
   text-align: right;
+  transition: color 0.3s ease;
 }
 
 /* Select */
 .select-input {
   padding: 6px 10px;
-  background: #1e1e1e;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--bg-window-content);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   font-size: 14px;
   cursor: pointer;
   min-width: 150px;
   outline: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .select-input:focus {
@@ -589,13 +618,13 @@ const accentColors = [
 
 /* User Card */
 .user-card {
-  background: #1e1e1e;
+  background: var(--bg-window-content);
   border-radius: 10px;
   padding: 20px;
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .user-avatar {
@@ -620,13 +649,14 @@ const accentColors = [
 .user-name {
   font-size: 17px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   margin-bottom: 4px;
+  transition: color 0.3s ease;
 }
 
 .user-role {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   margin-bottom: 12px;
 }
 
@@ -643,25 +673,26 @@ const accentColors = [
 }
 
 .detail-label {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
 }
 
 .detail-value {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
+  transition: color 0.3s ease;
 }
 
 /* About Section */
 .about-section {
-  background: #1e1e1e;
+  background: var(--bg-window-content);
   border-radius: 10px;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .about-item {
   display: flex;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .about-item:last-child {
@@ -670,12 +701,13 @@ const accentColors = [
 
 .about-label {
   min-width: 120px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   font-size: 13px;
 }
 
 .about-value {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   font-size: 13px;
+  transition: color 0.3s ease;
 }
 </style>

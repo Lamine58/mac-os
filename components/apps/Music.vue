@@ -143,8 +143,8 @@
           </div>
         </div>
         <div class="player-right">
-          <button class="player-btn-small" title="Volume">
-            <i class="bi bi-volume-up"></i>
+          <button class="player-btn-small" @click="toggleMute" :title="isMuted ? 'Activer le son' : 'Couper le son'">
+            <i :class="isMuted ? 'bi bi-volume-mute' : 'bi bi-volume-up'"></i>
           </button>
         </div>
         <audio 
@@ -211,6 +211,8 @@ const isPlaying = ref(false)
 const progress = ref(0)
 const currentTime = ref(0)
 const audioPlayer = ref<HTMLAudioElement | null>(null)
+const isMuted = ref(false)
+const savedVolume = ref(1)
 
 const playSong = async (song: Song) => {
   if (currentSong.value?.id === song.id) {
@@ -479,6 +481,21 @@ const formatDuration = (seconds: number): string => {
   return formatTime(seconds)
 }
 
+const toggleMute = () => {
+  if (!audioPlayer.value) return
+  
+  if (isMuted.value) {
+    // Réactiver le son
+    audioPlayer.value.volume = savedVolume.value
+    isMuted.value = false
+  } else {
+    // Couper le son
+    savedVolume.value = audioPlayer.value.volume
+    audioPlayer.value.volume = 0
+    isMuted.value = true
+  }
+}
+
 // Pause quand la fenêtre se ferme
 watch(() => props.isOpen, (isOpen) => {
   if (!isOpen && audioPlayer.value) {
@@ -499,16 +516,18 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 /* Sidebar */
 .music-sidebar {
   width: 220px;
-  background: #252525;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
   padding: 20px 0;
   overflow-y: auto;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .sidebar-section {
@@ -519,11 +538,12 @@ onUnmounted(() => {
 .sidebar-label {
   font-size: 11px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 8px 12px;
   margin-bottom: 4px;
+  transition: color 0.3s ease;
 }
 
 .sidebar-item {
@@ -532,14 +552,14 @@ onUnmounted(() => {
   gap: 10px;
   padding: 8px 12px;
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.3s ease;
 }
 
 .sidebar-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .sidebar-item.active {
@@ -557,7 +577,8 @@ onUnmounted(() => {
 .music-main {
   flex: 1;
   overflow-y: auto;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 .music-header {
@@ -565,14 +586,16 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   padding: 20px 30px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
 .music-header h1 {
   font-size: 28px;
   font-weight: 700;
-  color: white;
+  color: var(--text-color);
   margin: 0;
+  transition: color 0.3s ease;
 }
 
 .header-actions {
@@ -586,18 +609,18 @@ onUnmounted(() => {
   border: none;
   background: transparent;
   border-radius: 6px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   font-size: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
+  transition: all 0.2s, color 0.3s ease;
 }
 
 .action-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: var(--hover-bg);
+  color: var(--text-color);
 }
 
 /* Table des chansons */
@@ -610,12 +633,13 @@ onUnmounted(() => {
   grid-template-columns: 40px 1fr 200px 80px;
   gap: 16px;
   padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
   font-size: 12px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  transition: border-color 0.3s ease, color 0.3s ease;
 }
 
 .table-body {
@@ -636,7 +660,7 @@ onUnmounted(() => {
 }
 
 .table-row:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
 }
 
 .table-row.active {
@@ -651,7 +675,8 @@ onUnmounted(() => {
 .col-number {
   text-align: center;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
+  transition: color 0.3s ease;
 }
 
 .table-row.active .col-number {
@@ -683,10 +708,11 @@ onUnmounted(() => {
 .col-title span {
   font-size: 14px;
   font-weight: 400;
-  color: white;
+  color: var(--text-color);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
 .table-row.playing .col-title span {
@@ -696,17 +722,19 @@ onUnmounted(() => {
 
 .col-artist {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
 .col-duration {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   text-align: right;
   font-variant-numeric: tabular-nums;
+  transition: color 0.3s ease;
 }
 
 .table-header .col-duration {
@@ -718,10 +746,11 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   padding: 12px 20px;
-  background: #252525;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border-top: 1px solid var(--border-color);
   gap: 20px;
   min-height: 80px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .player-left {
@@ -746,19 +775,21 @@ onUnmounted(() => {
 .player-title {
   font-size: 13px;
   font-weight: 500;
-  color: white;
+  color: var(--text-color);
   margin-bottom: 2px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
 .player-artist {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
 .player-center {
@@ -781,31 +812,33 @@ onUnmounted(() => {
   height: 36px;
   border: none;
   background: transparent;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: all 0.2s;
+  transition: all 0.2s, color 0.3s ease;
 }
 
 .player-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: var(--hover-bg);
+  color: var(--text-color);
 }
 
 .player-btn.play-btn {
   width: 44px;
   height: 44px;
   font-size: 24px;
-  background: white;
-  color: #1e1e1e;
+  background: var(--text-color);
+  color: var(--bg-window-content);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .player-btn.play-btn:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--text-color-secondary);
+  opacity: 0.9;
 }
 
 .player-btn:disabled {
@@ -818,12 +851,14 @@ onUnmounted(() => {
 }
 
 .empty-cover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-color-secondary);
+  opacity: 0.3;
   font-size: 24px;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .player-progress {
@@ -836,9 +871,10 @@ onUnmounted(() => {
 .time-current,
 .time-total {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   font-variant-numeric: tabular-nums;
   min-width: 35px;
+  transition: color 0.3s ease;
 }
 
 .time-current {
@@ -848,17 +884,18 @@ onUnmounted(() => {
 .progress-track {
   flex: 1;
   height: 4px;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
   border-radius: 2px;
   cursor: pointer;
   position: relative;
+  transition: background-color 0.3s ease;
 }
 
 .progress-fill {
   height: 100%;
-  background: white;
+  background: var(--text-color);
   border-radius: 2px;
-  transition: width 0.1s;
+  transition: width 0.1s, background-color 0.3s ease;
 }
 
 .player-right {
@@ -873,19 +910,19 @@ onUnmounted(() => {
   height: 32px;
   border: none;
   background: transparent;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   font-size: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 6px;
-  transition: all 0.2s;
+  transition: all 0.2s, color 0.3s ease;
 }
 
 .player-btn-small:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: var(--hover-bg);
+  color: var(--text-color);
 }
 
 audio {
@@ -928,11 +965,12 @@ audio {
 }
 
 .banner-message {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   font-size: 15px;
   font-weight: 500;
   text-align: center;
   margin: 0;
   line-height: 1.5;
+  transition: color 0.3s ease;
 }
 </style>

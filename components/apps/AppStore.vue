@@ -88,6 +88,7 @@
                 <h2>{{ currentAppData.name }}</h2>
                 <p class="detail-category-text">{{ currentAppData.category }}</p>
                 <a :href="currentAppData.appStoreLink" target="_blank" class="get-button-large">
+                  <i class="bi bi-arrow-down-circle"></i>
                   Obtenir
                 </a>
               </div>
@@ -209,16 +210,18 @@ const closeLightbox = () => {
 .appstore-content {
   display: flex;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 /* Sidebar */
 .appstore-sidebar {
   width: 240px;
-  background: #252525;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
   padding: 20px 0;
   overflow-y: auto;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .sidebar-section {
@@ -228,8 +231,8 @@ const closeLightbox = () => {
 
 .sidebar-label {
   font-size: 11px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  font-weight: 200;
+  color: var(--text-color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   padding: 8px 12px;
@@ -242,14 +245,14 @@ const closeLightbox = () => {
   gap: 10px;
   padding: 10px 12px;
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   font-size: 14px;
   cursor: pointer;
   transition: background 0.2s;
 }
 
 .sidebar-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .sidebar-item.active {
@@ -267,7 +270,7 @@ const closeLightbox = () => {
 .appstore-main {
   flex: 1;
   overflow-y: auto;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .featured-view {
@@ -281,20 +284,20 @@ const closeLightbox = () => {
 .featured-header h1 {
   font-size: 40px;
   font-weight: 700;
-  color: white;
+  color: var(--text-color);
   margin: 0;
 }
 
 /* Hero Card */
 .hero-card {
   margin: 0 40px 40px;
-  background: #252525;
+  background: var(--bg-sidebar);
   border-radius: 20px;
   overflow: hidden;
   display: flex;
   cursor: pointer;
   transition: transform 0.2s;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   height: 400px;
 }
 
@@ -306,8 +309,9 @@ const closeLightbox = () => {
   width: 280px;
   height: 100%;
   overflow: hidden;
-  background: #1a1a1a;
+  background: var(--bg-window);
   flex-shrink: 0;
+  transition: background-color 0.3s ease;
 }
 
 .hero-image img {
@@ -322,16 +326,16 @@ const closeLightbox = () => {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: white;
+  color: var(--text-color);
 }
 
 .hero-badge {
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 200;
   text-transform: uppercase;
   letter-spacing: 0.8px;
   margin-bottom: 20px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
 }
 
 .hero-content h2 {
@@ -345,7 +349,7 @@ const closeLightbox = () => {
 .hero-description {
   font-size: 22px;
   margin: 0 0 28px 0;
-  color: rgba(255, 255, 255, 0.85);
+  color: var(--text-color);
   line-height: 1.5;
 }
 
@@ -355,7 +359,7 @@ const closeLightbox = () => {
   gap: 10px;
   font-size: 17px;
   margin-bottom: 28px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
 }
 
 .hero-rating .stars {
@@ -364,7 +368,7 @@ const closeLightbox = () => {
 }
 
 .hero-rating .stars .bi-star-fill {
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-color-secondary); opacity: 0.3;
   font-size: 17px;
 }
 
@@ -377,9 +381,9 @@ const closeLightbox = () => {
   background: #007AFF;
   border: none;
   border-radius: 22px;
-  color: white;
+  color: #ffffff;
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 200;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
@@ -399,7 +403,7 @@ const closeLightbox = () => {
 .section-title {
   font-size: 32px;
   font-weight: 700;
-  color: white;
+  color: var(--text-color);
   margin: 0 0 24px 0;
 }
 
@@ -410,12 +414,12 @@ const closeLightbox = () => {
 }
 
 .app-card {
-  background: #252525;
+  background: var(--bg-sidebar);
   border-radius: 16px;
   padding: 20px;
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   display: flex;
   gap: 16px;
   align-items: center;
@@ -423,7 +427,8 @@ const closeLightbox = () => {
 
 .app-card:hover {
   transform: translateY(-2px);
-  background: #2d2d2d;
+  background: var(--hover-bg);
+  transition: transform 0.2s, background-color 0.3s ease;
 }
 
 .app-card-icon {
@@ -449,15 +454,15 @@ const closeLightbox = () => {
 
 .app-card-name {
   font-size: 20px;
-  font-weight: 600;
-  color: white;
+  font-weight: 200;
+  color: var(--text-color);
   margin-bottom: 6px;
   letter-spacing: -0.3px;
 }
 
 .app-card-category {
   font-size: 15px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   margin-bottom: 8px;
 }
 
@@ -480,17 +485,17 @@ const closeLightbox = () => {
   align-items: center;
   gap: 16px;
   padding: 20px 40px;
-  background: #252525;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .back-btn {
   width: 36px;
   height: 36px;
   border: none;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   font-size: 18px;
   cursor: pointer;
   display: flex;
@@ -500,14 +505,14 @@ const closeLightbox = () => {
 }
 
 .back-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  color: white;
+  background: var(--hover-bg);
+  color: var(--text-color);
 }
 
 .detail-header h1 {
   font-size: 28px;
   font-weight: 700;
-  color: white;
+  color: var(--text-color);
   margin: 0;
 }
 
@@ -520,7 +525,7 @@ const closeLightbox = () => {
   gap: 30px;
   margin-bottom: 50px;
   padding-bottom: 40px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .detail-icon-large {
@@ -546,13 +551,13 @@ const closeLightbox = () => {
 .detail-info-section h2 {
   font-size: 40px;
   font-weight: 700;
-  color: white;
+  color: var(--text-color);
   margin: 0 0 8px 0;
 }
 
 .detail-category-text {
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   margin: 0 0 20px 0;
 }
 
@@ -566,7 +571,7 @@ const closeLightbox = () => {
 .stars-large {
   display: flex;
   gap: 4px;
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-color-secondary); opacity: 0.3;
 }
 
 .stars-large .bi-star-fill.filled {
@@ -576,7 +581,7 @@ const closeLightbox = () => {
 
 .rating-text-large {
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
 }
 
 .get-button-large {
@@ -586,7 +591,7 @@ const closeLightbox = () => {
   border-radius: 12px;
   color: white;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 200;
   cursor: pointer;
   text-decoration: none;
   display: inline-flex;
@@ -606,7 +611,7 @@ const closeLightbox = () => {
 .detail-screenshots-section h3 {
   font-size: 28px;
   font-weight: 700;
-  color: white;
+  color: var(--text-color);
   margin: 0 0 24px 0;
 }
 
@@ -623,12 +628,12 @@ const closeLightbox = () => {
 }
 
 .screenshots-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
   border-radius: 4px;
 }
 
 .screenshots-container::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--hover-bg);
   border-radius: 4px;
 }
 
@@ -655,14 +660,14 @@ const closeLightbox = () => {
 .detail-description-section h3 {
   font-size: 28px;
   font-weight: 700;
-  color: white;
+  color: var(--text-color);
   margin: 0 0 20px 0;
 }
 
 .detail-description-section p {
   font-size: 18px;
   line-height: 1.7;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   margin: 0;
 }
 
@@ -673,16 +678,16 @@ const closeLightbox = () => {
 }
 
 .info-card-item {
-  background: #252525;
+  background: var(--bg-sidebar);
   border-radius: 12px;
   padding: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 .info-label-text {
   font-size: 13px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  font-weight: 200;
+  color: var(--text-color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 10px;
@@ -691,7 +696,7 @@ const closeLightbox = () => {
 .info-value-text {
   font-size: 17px;
   font-weight: 500;
-  color: white;
+  color: var(--text-color);
 }
 
 /* Lightbox */
@@ -723,9 +728,9 @@ const closeLightbox = () => {
   width: 44px;
   height: 44px;
   border: none;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
   border-radius: 50%;
-  color: white;
+  color: var(--text-color);
   font-size: 24px;
   cursor: pointer;
   display: flex;
@@ -735,6 +740,6 @@ const closeLightbox = () => {
 }
 
 .lightbox-close:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--hover-bg);
 }
 </style>

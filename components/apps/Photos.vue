@@ -120,19 +120,19 @@ onMounted(() => {
 .photos-content {
   display: flex;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .photos-sidebar {
   width: 200px;
-  background: #252525;
+  background: var(--bg-sidebar);
   padding: 20px 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid var(--border-color);
 }
 
 .section-title {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   padding: 10px 20px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -143,13 +143,13 @@ onMounted(() => {
   align-items: center;
   gap: 10px;
   padding: 10px 20px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   cursor: pointer;
   transition: background 0.2s;
 }
 
 .section-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .section-item.active {
@@ -161,7 +161,7 @@ onMounted(() => {
   flex: 1;
   overflow-y: auto;
   padding: 20px;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .photos-grid {
@@ -186,6 +186,13 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.photo-item:hover img {
+  border-color: var(--text-color-secondary);
 }
 
 /* Lightbox styles */
@@ -266,15 +273,15 @@ onMounted(() => {
   bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
-  color: rgba(255, 255, 255, 0.9);
+  color: white;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 200;
   text-align: center;
   padding: 10px 20px;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(15px);
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-color);
   z-index: 10001;
 }
 

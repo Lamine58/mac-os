@@ -134,7 +134,7 @@
 
         <!-- Vue vide -->
         <div v-else class="no-email">
-          <i class="bi bi-envelope" style="font-size: 64px; color: rgba(255, 255, 255, 0.3);"></i>
+          <i class="bi bi-envelope no-email-icon"></i>
           <p>Sélectionnez un email ou composez un nouveau message</p>
         </div>
       </div>
@@ -316,21 +316,23 @@ watch(() => props.isOpen, (isOpen) => {
 .mail-content {
   display: flex;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 /* Sidebar */
 .mail-sidebar {
   width: 280px;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  background: #252525;
+  background: var(--bg-sidebar);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .sidebar-header {
   padding: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .compose-button {
@@ -339,9 +341,9 @@ watch(() => props.isOpen, (isOpen) => {
   background: #007AFF;
   border: none;
   border-radius: 8px;
-  color: white;
+  color: #ffffff;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 200;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -356,15 +358,16 @@ watch(() => props.isOpen, (isOpen) => {
 
 .folders-list {
   padding: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .folder-item {
   padding: 10px 12px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   font-size: 14px;
   cursor: pointer;
   border-radius: 6px;
+  transition: color 0.3s ease;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -373,12 +376,12 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .folder-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
 }
 
 .folder-item.active {
   background: rgba(0, 122, 255, 0.2);
-  color: white;
+  color: var(--text-color);
 }
 
 .emails-list {
@@ -391,13 +394,13 @@ watch(() => props.isOpen, (isOpen) => {
   align-items: flex-start;
   padding: 12px;
   cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
   transition: background 0.2s;
   position: relative;
 }
 
 .email-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
 }
 
 .email-item.active {
@@ -416,8 +419,8 @@ watch(() => props.isOpen, (isOpen) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: 600;
+  color: var(--text-color);
+  font-weight: 200;
   font-size: 14px;
 }
 
@@ -434,22 +437,23 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .email-from {
-  font-weight: 600;
+  font-weight: 200;
   font-size: 14px;
-  color: white;
+  color: var(--text-color);
   margin-bottom: 4px;
 }
 
 .email-subject {
   font-weight: 500;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   margin-bottom: 4px;
+  transition: color 0.3s ease;
 }
 
 .email-preview {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -457,24 +461,25 @@ watch(() => props.isOpen, (isOpen) => {
 
 .email-time {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-color-secondary);
   margin-left: 8px;
   white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
 .delete-email-btn {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--hover-bg);
   border: none;
   border-radius: 4px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   cursor: pointer;
   padding: 6px 8px;
   font-size: 12px;
   opacity: 0;
-  transition: opacity 0.2s, background 0.2s;
+  transition: opacity 0.2s, background 0.3s ease, color 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -485,8 +490,8 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .delete-email-btn:hover {
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  background: var(--hover-bg);
+  color: var(--text-color);
 }
 
 /* Zone principale */
@@ -494,7 +499,7 @@ watch(() => props.isOpen, (isOpen) => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 /* Vue de composition */
@@ -509,29 +514,29 @@ watch(() => props.isOpen, (isOpen) => {
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: #252525;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-sidebar);
 }
 
 .compose-title {
-  font-weight: 600;
+  font-weight: 200;
   font-size: 15px;
-  color: white;
+  color: var(--text-color);
 }
 
 .close-compose {
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   font-size: 20px;
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 4px;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.3s ease;
 }
 
 .close-compose:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .compose-form {
@@ -552,19 +557,21 @@ watch(() => props.isOpen, (isOpen) => {
 .compose-field label {
   font-size: 13px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
+  transition: color 0.3s ease;
 }
 
 .compose-input,
 .compose-textarea {
   padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: white;
+  color: var(--text-color);
   font-size: 14px;
   font-family: inherit;
   outline: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .compose-input:focus,
@@ -573,7 +580,7 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .compose-input[readonly] {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
   cursor: not-allowed;
 }
 
@@ -593,9 +600,9 @@ watch(() => props.isOpen, (isOpen) => {
   background: #007AFF;
   border: none;
   border-radius: 8px;
-  color: white;
+  color: #ffffff;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 200;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -614,7 +621,7 @@ watch(() => props.isOpen, (isOpen) => {
 
 .save-status {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
 }
 
 /* Vue de lecture */
@@ -626,8 +633,8 @@ watch(() => props.isOpen, (isOpen) => {
 
 .email-header {
   padding: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: #252525;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-sidebar);
 }
 
 .email-header-top {
@@ -646,32 +653,32 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .email-header-from {
-  font-weight: 600;
+  font-weight: 200;
   font-size: 15px;
-  color: white;
+  color: var(--text-color);
   margin-bottom: 4px;
 }
 
 .email-header-to {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
 }
 
 .email-header-time {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   white-space: nowrap;
 }
 
 .delete-email-header-btn {
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--hover-bg);
   border: none;
   border-radius: 6px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   cursor: pointer;
   padding: 8px 12px;
   font-size: 14px;
-  transition: background 0.2s;
+  transition: background 0.3s ease, color 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -679,14 +686,14 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .delete-email-header-btn:hover {
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  background: var(--hover-bg);
+  color: var(--text-color);
 }
 
 .email-header-subject {
-  font-weight: 600;
+  font-weight: 200;
   font-size: 16px;
-  color: white;
+  color: var(--text-color);
 }
 
 .email-body {
@@ -698,8 +705,9 @@ watch(() => props.isOpen, (isOpen) => {
 .email-body-content {
   font-size: 14px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   white-space: pre-wrap;
+  transition: color 0.3s ease;
 }
 
 .no-email {
@@ -708,7 +716,14 @@ watch(() => props.isOpen, (isOpen) => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
+}
+
+.no-email-icon {
+  font-size: 64px;
+  color: var(--text-color-secondary);
+  opacity: 0.3;
+  transition: color 0.3s ease;
 }
 
 .no-email p {

@@ -1,7 +1,10 @@
 <template>
   <div 
     class="dock" 
-    :class="{ 'dock-hidden': dockAutoHide }"
+    :class="{ 
+      'dock-hidden': dockAutoHide && !isDockVisible,
+      'dock-visible': dockAutoHide && isDockVisible
+    }"
     :style="{
       '--dock-icon-size': `${dockIconSize}px`,
       '--dock-magnification': dockMagnification ? '1.2' : '1'
@@ -175,7 +178,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
 
 const props = defineProps<{
   activeApps: Record<string, boolean>
@@ -187,6 +190,73 @@ const emit = defineEmits<{
 
 const { getAssetPath } = useAssetPath()
 const { dockSize, dockAutoHide, dockMagnification } = useDockSettings()
+
+const isDockVisible = ref(true)
+const mouseY = ref(0)
+const hideTimeout = ref<NodeJS.Timeout | null>(null)
+
+// Détecter la position de la souris
+const handleMouseMove = (e: MouseEvent) => {
+  mouseY.value = e.clientY
+  const windowHeight = window.innerHeight
+  const threshold = 80 // Zone en bas de l'écran (80px)
+  
+  if (dockAutoHide.value) {
+    if (windowHeight - e.clientY <= threshold) {
+      // La souris est proche du bas, afficher le dock immédiatement
+      if (hideTimeout.value) {
+        clearTimeout(hideTimeout.value)
+        hideTimeout.value = null
+      }
+      isDockVisible.value = true
+    } else {
+      // La souris est loin du bas, masquer le dock après un délai plus long
+      if (hideTimeout.value) {
+        clearTimeout(hideTimeout.value)
+      }
+      hideTimeout.value = setTimeout(() => {
+        isDockVisible.value = false
+      }, 800) // Délai de 800ms avant de masquer
+    }
+  } else {
+    // Si auto-hide est désactivé, toujours afficher
+    isDockVisible.value = true
+  }
+}
+
+// Surveiller les changements de dockAutoHide
+watch(dockAutoHide, (newValue) => {
+  if (newValue) {
+    // Si auto-hide est activé, masquer par défaut
+    isDockVisible.value = false
+  } else {
+    // Si auto-hide est désactivé, toujours afficher
+    isDockVisible.value = true
+    if (hideTimeout.value) {
+      clearTimeout(hideTimeout.value)
+      hideTimeout.value = null
+    }
+  }
+}, { immediate: true })
+
+onMounted(() => {
+  if (process.client) {
+    document.addEventListener('mousemove', handleMouseMove)
+    // Initialiser l'état selon dockAutoHide
+    if (dockAutoHide.value) {
+      isDockVisible.value = false
+    }
+  }
+})
+
+onUnmounted(() => {
+  if (process.client) {
+    document.removeEventListener('mousemove', handleMouseMove)
+    if (hideTimeout.value) {
+      clearTimeout(hideTimeout.value)
+    }
+  }
+})
 
 // Calculer la taille des icônes basée sur le pourcentage (30-100% de 50px = 15px à 50px)
 const dockIconSize = computed(() => {

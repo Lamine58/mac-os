@@ -418,20 +418,21 @@ onMounted(() => {
   display: inline-block;
 }
 
-/* Dropdown Menu - Dark Mode */
+/* Dropdown Menu */
 .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
-  background: rgba(30, 30, 30, 0.95);
+  background: var(--bg-window-content);
   backdrop-filter: blur(20px);
   border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 0 1px var(--border-color);
   padding: 4px 0;
   min-width: 200px;
   margin-top: 4px;
   z-index: 10000;
   animation: fadeIn 0.15s ease-out;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 @keyframes fadeIn {
@@ -465,29 +466,32 @@ onMounted(() => {
   padding: 6px 20px 6px 12px;
   cursor: pointer;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.9);
-  transition: background 0.1s;
+  color: var(--text-color);
+  transition: background 0.1s, color 0.3s ease;
   white-space: nowrap;
 }
 
 .menu-item-dropdown:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .menu-item-dropdown:active {
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--hover-bg);
+  opacity: 0.8;
 }
 
 .menu-shortcut {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   font-size: 11px;
   margin-left: 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'SF Mono', Monaco, monospace;
+  transition: color 0.3s ease;
 }
 
 .menu-separator {
   height: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--border-color);
   margin: 4px 0;
+  transition: background-color 0.3s ease;
 }
 </style>

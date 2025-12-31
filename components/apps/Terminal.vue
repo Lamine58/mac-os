@@ -240,16 +240,16 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 13px;
 }
 
 .terminal-header {
   padding: 10px 15px;
-  background: #2e2e2e;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.8);
+  background: var(--bg-window);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color-secondary);
   font-size: 12px;
 }
 
@@ -275,7 +275,7 @@ onMounted(() => {
 }
 
 .terminal-response {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   white-space: pre-wrap;
 }
 

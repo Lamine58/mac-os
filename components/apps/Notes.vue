@@ -81,9 +81,9 @@
           ></textarea>
         </div>
         <div v-else class="no-note">
-          <i class="bi bi-sticky" style="font-size: 64px; color: rgba(255, 255, 255, 0.3);"></i>
+          <i class="bi bi-sticky" style="font-size: 64px; color: var(--text-color-secondary); opacity: 0.3;"></i>
           <p>Sélectionnez une note ou créez-en une nouvelle</p>
-          <p class="info-text">💬 Vos messages sont sauvegardés en ligne et visibles par tous les visiteurs</p>
+          <p class="info-text">Vos messages sont sauvegardés en ligne et visibles par tous les visiteurs</p>
         </div>
       </div>
     </div>
@@ -265,21 +265,22 @@ watch(() => props.isOpen, async (isOpen) => {
 
 .notes-sidebar {
   width: 250px;
-  background: #252525;
-  border-right: 1px solid #333;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
 }
 
 .visitor-info-banner {
   background: linear-gradient(135deg, #007aff 0%, #0051d5 100%);
-  color: white;
+  color: #ffffff;
   padding: 12px 15px;
   font-size: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
 .visitor-info-banner i {
@@ -293,8 +294,9 @@ watch(() => props.isOpen, async (isOpen) => {
   background: #007aff;
   border: none;
   border-radius: 8px;
-  color: white;
+  color: #ffffff;
   font-size: 14px;
+  font-weight: 200;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -314,7 +316,7 @@ watch(() => props.isOpen, async (isOpen) => {
 
 .note-item {
   padding: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
   cursor: pointer;
   transition: background 0.2s;
   display: flex;
@@ -325,7 +327,7 @@ watch(() => props.isOpen, async (isOpen) => {
 }
 
 .note-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
 }
 
 .note-item.active {
@@ -340,13 +342,13 @@ watch(() => props.isOpen, async (isOpen) => {
 .note-title {
   font-size: 14px;
   font-weight: 500;
-  color: white;
+  color: var(--text-color);
   margin-bottom: 5px;
 }
 
 .note-preview {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   margin-bottom: 5px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -367,14 +369,14 @@ watch(() => props.isOpen, async (isOpen) => {
 }
 
 .note-date {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-color-secondary);
 }
 
 .notes-editor {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .editor-content {
@@ -388,8 +390,9 @@ watch(() => props.isOpen, async (isOpen) => {
   align-items: center;
   gap: 10px;
   padding: 10px 20px;
-  background: rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid #333;
+  background: var(--bg-window-toolbar);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .header-actions {
@@ -401,21 +404,29 @@ watch(() => props.isOpen, async (isOpen) => {
 .note-author-input {
   flex: 1;
   padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-window-content);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
-  color: white;
+  color: var(--text-color);
   font-size: 12px;
   outline: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.note-author-input:focus {
+  border-color: var(--accent-color);
+  background: var(--bg-window-content);
 }
 
 .note-author-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-color-secondary);
+  opacity: 0.7;
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
 
 .save-status {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   display: flex;
   align-items: center;
   gap: 5px;
@@ -447,8 +458,8 @@ watch(() => props.isOpen, async (isOpen) => {
   padding: 15px 20px;
   background: transparent;
   border: none;
-  border-bottom: 1px solid #333;
-  color: white;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-color);
   font-size: 20px;
   font-weight: 500;
   outline: none;
@@ -459,7 +470,7 @@ watch(() => props.isOpen, async (isOpen) => {
   padding: 20px;
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   font-size: 14px;
   font-family: inherit;
   line-height: 1.6;
@@ -473,7 +484,7 @@ watch(() => props.isOpen, async (isOpen) => {
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   text-align: center;
   padding: 40px;
 }
@@ -486,15 +497,15 @@ watch(() => props.isOpen, async (isOpen) => {
 }
 
 .delete-note-btn {
-  background: rgba(0, 0, 0, 0.3);
-  border: none;
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   cursor: pointer;
   padding: 6px 8px;
   font-size: 14px;
   opacity: 0;
-  transition: opacity 0.2s, background 0.2s;
+  transition: opacity 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -506,27 +517,29 @@ watch(() => props.isOpen, async (isOpen) => {
 }
 
 .delete-note-btn:hover {
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  background: var(--hover-bg);
+  border-color: var(--accent-color);
+  color: var(--text-color);
 }
 
 .delete-note-header-btn {
-  background: rgba(0, 0, 0, 0.3);
-  border: none;
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
   border-radius: 6px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   cursor: pointer;
   padding: 8px 12px;
   font-size: 14px;
-  transition: background 0.2s;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .delete-note-header-btn:hover {
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
+  background: var(--hover-bg);
+  border-color: var(--accent-color);
+  color: var(--text-color);
 }
 </style>
 

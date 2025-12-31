@@ -20,7 +20,7 @@
         </div>
         <div class="safari-address-bar">
           <div class="address-bar-left">
-            <i v-if="isValidUrl && currentUrl" class="bi bi-lock-fill" style="color: rgba(255,255,255,0.6); font-size: 12px;"></i>
+            <i v-if="isValidUrl && currentUrl" class="bi bi-lock-fill" style="color: var(--text-color-secondary); font-size: 12px;"></i>
           </div>
           <input 
             type="text" 
@@ -179,7 +179,7 @@ const closeTab = () => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .safari-toolbar {
@@ -187,8 +187,8 @@ const closeTab = () => {
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: #2e2e2e;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-window);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .safari-nav-buttons {
@@ -199,7 +199,7 @@ const closeTab = () => {
 .nav-btn {
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   width: 28px;
   height: 28px;
   border-radius: 4px;
@@ -207,12 +207,12 @@ const closeTab = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.3s ease;
   font-size: 14px;
 }
 
 .nav-btn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .nav-btn:disabled {
@@ -224,9 +224,10 @@ const closeTab = () => {
   flex: 1;
   display: flex;
   align-items: center;
-  background: #3e3e3e;
+  background: var(--hover-bg);
+  transition: background-color 0.3s ease;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   padding: 0 12px;
   height: 32px;
   transition: box-shadow 0.2s;
@@ -246,16 +247,17 @@ const closeTab = () => {
   flex: 1;
   border: none;
   background: transparent;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
   font-size: 13px;
   outline: none;
   padding: 0 8px;
+  transition: color 0.3s ease;
 }
 
 .refresh-btn {
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -263,6 +265,7 @@ const closeTab = () => {
   align-items: center;
   justify-content: center;
   font-size: 12px;
+  transition: color 0.3s ease;
 }
 
 .safari-actions {
@@ -273,9 +276,10 @@ const closeTab = () => {
 .action-btn {
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   width: 28px;
   height: 28px;
+  transition: color 0.3s ease;
   border-radius: 4px;
   cursor: pointer;
   display: flex;
@@ -286,7 +290,7 @@ const closeTab = () => {
 }
 
 .action-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .safari-tabs {
@@ -294,8 +298,8 @@ const closeTab = () => {
   align-items: center;
   gap: 2px;
   padding: 0 8px;
-  background: #252525;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--border-color);
   overflow-x: auto;
 }
 
@@ -304,18 +308,18 @@ const closeTab = () => {
   align-items: center;
   gap: 8px;
   padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
   border-radius: 8px 8px 0 0;
   cursor: pointer;
   min-width: 120px;
   max-width: 200px;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
 }
 
 .tab.active {
-  background: #1e1e1e;
-  color: rgba(255, 255, 255, 0.9);
+  background: var(--bg-window-content);
+  color: var(--text-color);
 }
 
 .tab-title {
@@ -328,7 +332,7 @@ const closeTab = () => {
 .tab-close {
   background: transparent;
   border: none;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -342,7 +346,7 @@ const closeTab = () => {
 }
 
 .tab-close:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--hover-bg);
 }
 
 .new-tab {
@@ -356,14 +360,15 @@ const closeTab = () => {
   flex: 1;
   overflow: hidden;
   position: relative;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .safari-iframe {
   width: 100%;
   height: 100%;
   border: none;
-  background: white;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 .safari-home {
@@ -374,7 +379,7 @@ const closeTab = () => {
   height: 100%;
   padding: 40px;
   text-align: center;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .safari-logo {
@@ -385,7 +390,7 @@ const closeTab = () => {
   margin: 0 0 10px 0;
   font-size: 32px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-color);
 }
 
 .safari-favorites {
@@ -398,7 +403,7 @@ const closeTab = () => {
   font-size: 13px;
   font-weight: 600;
   margin-bottom: 20px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -425,6 +430,7 @@ const closeTab = () => {
 }
 
 .favorite-icon {
+  color:white !important;
   width: 48px;
   height: 48px;
   border-radius: 12px;
@@ -433,13 +439,13 @@ const closeTab = () => {
   justify-content: center;
   font-weight: 600;
   font-size: 18px;
-  color: white;
+  color: var(--text-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .favorite-item span {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-color-secondary);
   font-weight: 500;
 }
 </style>

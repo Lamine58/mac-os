@@ -24,7 +24,7 @@
         <td>{{ item.type }}</td>
       </tr>
       <tr v-if="folderContents.length === 0 && props.searchQuery">
-        <td colspan="4" style="text-align: center; padding: 40px; color: #aaa;">
+        <td colspan="4" class="no-results-cell">
           Aucun résultat trouvé pour "{{ props.searchQuery }}"
         </td>
       </tr>
@@ -90,7 +90,24 @@ const openTextFile = (file: string, name: string) => {
 }
 
 .clickable-file:hover {
-  background-color: #353535;
+  background-color: var(--hover-bg);
+  transition: background-color 0.3s ease;
+}
+
+.no-results-cell {
+  text-align: center;
+  padding: 40px !important;
+  color: var(--text-color-secondary) !important;
+  transition: color 0.3s ease;
+  font-size: 14px;
+}
+
+.theme-light .no-results-cell {
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.theme-dark .no-results-cell {
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 </style>
 

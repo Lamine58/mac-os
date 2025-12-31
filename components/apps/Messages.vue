@@ -95,7 +95,7 @@
         </div>
 
         <div v-else class="no-conversation">
-          <i class="bi bi-chat-dots" style="font-size: 64px; color: rgba(255, 255, 255, 0.3);"></i>
+          <i class="bi bi-chat-dots" style="font-size: 64px; color: var(--text-color-secondary); opacity: 0.3;"></i>
           <p>Sélectionnez une conversation</p>
         </div>
       </div>
@@ -300,36 +300,38 @@ watch(() => props.isOpen, (isOpen) => {
 .messages-content {
   display: flex;
   height: 100%;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
+  transition: background-color 0.3s ease;
 }
 
 /* Sidebar */
 .messages-sidebar {
   width: 280px;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  background: #252525;
+  background: var(--bg-sidebar);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .sidebar-header {
   padding: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .search-input {
   width: 100%;
   padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
-  color: white;
+  color: var(--text-color);
   font-size: 14px;
   outline: none;
 }
 
 .search-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
 }
 
 .conversations-list {
@@ -342,12 +344,12 @@ watch(() => props.isOpen, (isOpen) => {
   align-items: center;
   padding: 12px;
   cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-color);
   transition: background 0.2s;
 }
 
 .conversation-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--hover-bg);
 }
 
 .conversation-item.active {
@@ -366,7 +368,7 @@ watch(() => props.isOpen, (isOpen) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--text-color);
   font-weight: 600;
   font-size: 18px;
 }
@@ -386,13 +388,13 @@ watch(() => props.isOpen, (isOpen) => {
 .conversation-name {
   font-weight: 600;
   font-size: 15px;
-  color: white;
+  color: var(--text-color);
   margin-bottom: 4px;
 }
 
 .conversation-preview {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -400,7 +402,7 @@ watch(() => props.isOpen, (isOpen) => {
 
 .conversation-time {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-color-secondary);
   margin-left: 8px;
 }
 
@@ -409,7 +411,7 @@ watch(() => props.isOpen, (isOpen) => {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #1e1e1e;
+  background: var(--bg-window-content);
 }
 
 .conversation-view {
@@ -422,8 +424,8 @@ watch(() => props.isOpen, (isOpen) => {
   display: flex;
   align-items: center;
   padding: 12px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: #252525;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-sidebar);
 }
 
 .header-avatar {
@@ -437,13 +439,13 @@ watch(() => props.isOpen, (isOpen) => {
 .header-name {
   font-weight: 600;
   font-size: 15px;
-  color: white;
+  color: var(--text-color);
   margin-bottom: 2px;
 }
 
 .header-phone {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-color-secondary);
 }
 
 .messages-list {
@@ -477,14 +479,15 @@ watch(() => props.isOpen, (isOpen) => {
 
 .message-bubble.sent {
   background: #007AFF;
-  color: white;
+  color: #ffffff;
   border-bottom-right-radius: 4px;
 }
 
 .message-bubble.received {
-  background: #2d2d2d;
-  color: white;
+  background: var(--hover-bg);
+  color: var(--text-color);
   border-bottom-left-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .message-text {
@@ -512,7 +515,7 @@ watch(() => props.isOpen, (isOpen) => {
   background: rgba(0, 0, 0, 0.3);
   border: none;
   border-radius: 4px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-color-secondary);
   cursor: pointer;
   padding: 4px 6px;
   font-size: 12px;
@@ -533,13 +536,13 @@ watch(() => props.isOpen, (isOpen) => {
 
 .delete-message-btn:hover {
   background: rgba(0, 0, 0, 0.6);
-  color: white;
+  color: var(--text-color);
 }
 
 .message-input-area {
   padding: 12px 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background: #252525;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-sidebar);
 }
 
 .input-container {
@@ -551,10 +554,10 @@ watch(() => props.isOpen, (isOpen) => {
 .message-input {
   flex: 1;
   padding: 10px 14px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--hover-bg);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
-  color: white;
+  color: var(--text-color);
   font-size: 14px;
   font-family: inherit;
   resize: none;
@@ -564,7 +567,7 @@ watch(() => props.isOpen, (isOpen) => {
 }
 
 .message-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
 }
 
 .send-button {
@@ -573,7 +576,7 @@ watch(() => props.isOpen, (isOpen) => {
   border-radius: 50%;
   background: #007AFF;
   border: none;
-  color: white;
+  color: #ffffff;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -594,7 +597,7 @@ watch(() => props.isOpen, (isOpen) => {
 
 .save-status {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
   margin-top: 4px;
   text-align: center;
 }
@@ -605,7 +608,7 @@ watch(() => props.isOpen, (isOpen) => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-color-secondary);
 }
 
 .no-conversation p {

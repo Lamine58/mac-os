@@ -66,6 +66,16 @@ definePageMeta({
   }
 })
 
+// Vérifier la session avant d'afficher la page
+onMounted(() => {
+  if (process.client) {
+    const session = localStorage.getItem('macos-session')
+    if (session !== 'authenticated') {
+      navigateTo('/locked')
+    }
+  }
+})
+
 const currentFolder = ref('')
 const config = useRuntimeConfig()
 const baseURL = config.public.baseURL || '/mac-os/'

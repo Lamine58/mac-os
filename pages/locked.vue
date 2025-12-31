@@ -49,6 +49,10 @@ const correctPassword = 'azerty'
 
 const handleSubmit = () => {
   if (password.value.trim() === correctPassword) {
+    // Créer la session dans localStorage
+    if (process.client) {
+      localStorage.setItem('macos-session', 'authenticated')
+    }
     resetPassword()
     navigateTo('/home')
   } else {

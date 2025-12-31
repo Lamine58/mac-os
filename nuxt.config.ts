@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
 
     head: {
+      title: '\uF8FF Hasraridine Abdel-Lamine Ishola CV en ligne',
       meta: [
         {
           name: 'viewport',

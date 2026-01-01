@@ -267,8 +267,37 @@ onMounted(() => {
         }
       }
     } else if (isWindowDragging.value && !isMaximized.value) {
-      position.value.x = e.clientX - windowOffsetX.value
-      position.value.y = e.clientY - windowOffsetY.value
+      const newX = e.clientX - windowOffsetX.value
+      const newY = e.clientY - windowOffsetY.value
+      
+      // Contraintes pour empêcher la fenêtre de sortir de l'écran
+      // Garder au moins 50px de la fenêtre visible de chaque côté
+      const minVisible = 50
+      const windowWidth = constrainedWidth.value
+      const windowHeight = constrainedHeight.value
+      
+      // Limites pour X (côtés gauche et droit)
+      // Le bord gauche (x) doit être >= -(windowWidth - 50) pour garder 50px visibles à gauche
+      // Le bord droit (x + windowWidth) doit être <= window.innerWidth - 50 pour garder 50px visibles à droite
+      const minX = -(windowWidth - minVisible)
+      const maxX = window.innerWidth - windowWidth - minVisible
+      
+      // Limites pour Y (haut et bas)
+      // Le header (40px de haut) doit toujours rester visible, donc y >= 0
+      // Le bord bas (y + windowHeight) doit être <= window.innerHeight - 50 pour garder 50px visibles en bas
+      const headerHeight = 40
+      const minY = 0 // Le header doit toujours être visible
+      const maxY = window.innerHeight - windowHeight - minVisible
+      
+      // Appliquer les contraintes de manière stricte
+      position.value.x = Math.max(minX, Math.min(maxX, newX))
+      position.value.y = Math.max(minY, Math.min(maxY, newY))
+      
+      // Double vérification pour s'assurer que les valeurs sont bien contraintes
+      if (position.value.y < minY) position.value.y = minY
+      if (position.value.y > maxY) position.value.y = maxY
+      if (position.value.x < minX) position.value.x = minX
+      if (position.value.x > maxX) position.value.x = maxX
     }
   }
   

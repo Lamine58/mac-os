@@ -1,7 +1,12 @@
 <template>
   <div class="text-viewer-overlay" @click="close">
-    <div class="text-viewer-content" @click.stop>
-      <div class="text-viewer-header">
+    <div 
+      ref="contentElement"
+      class="text-viewer-content" 
+      :style="{ left: position.x + 'px', top: position.y + 'px' }"
+      @click.stop
+    >
+      <div class="text-viewer-header" @mousedown.stop="handleHeaderMouseDown">
         <div class="text-viewer-traffic-lights">
           <span class="text-viewer-close-btn" style="background-color: #ff5f56;" title="Fermer" @click.stop="close"></span>
           <span class="text-viewer-minimize-btn" style="background-color: #ffbd2e;" title="Réduire"></span>
@@ -35,9 +40,24 @@ const emit = defineEmits<{
 
 const content = ref('')
 const loading = ref(true)
+const contentElement = ref<HTMLElement | null>(null)
+const isDragging = ref(false)
+const windowOffsetX = ref(0)
+const windowOffsetY = ref(0)
+const position = ref({ x: 0, y: 0 })
 
 const close = () => {
   emit('close')
+}
+
+const handleHeaderMouseDown = (e: MouseEvent) => {
+  if (!contentElement.value) return
+  isDragging.value = true
+  const rect = contentElement.value.getBoundingClientRect()
+  windowOffsetX.value = e.clientX - rect.left
+  windowOffsetY.value = e.clientY - rect.top
+  contentElement.value.style.cursor = 'grabbing'
+  e.preventDefault()
 }
 
 onMounted(async () => {
@@ -53,17 +73,70 @@ onMounted(async () => {
     loading.value = false
   }
 
-  // Fermer avec Escape
+  // Centrer le modal initialement
+  nextTick(() => {
+    if (contentElement.value) {
+      const rect = contentElement.value.getBoundingClientRect()
+      position.value = {
+        x: (window.innerWidth - rect.width) / 2,
+        y: (window.innerHeight - rect.height) / 2
+      }
+    }
+  })
+
+  // Fermer avec Escape et gérer le drag
   const handleEscape = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       close()
     }
   }
   
+  const handleMouseMove = (e: MouseEvent) => {
+    if (isDragging.value && contentElement.value) {
+      const rect = contentElement.value.getBoundingClientRect()
+      const modalWidth = rect.width
+      const modalHeight = rect.height
+      const minVisibleTop = 200 // Minimum 200px du haut visible
+      
+      // Calculer les nouvelles positions
+      let newX = e.clientX - windowOffsetX.value
+      let newY = e.clientY - windowOffsetY.value
+      
+      // Contraintes pour Y : le haut doit toujours être visible (min 200px)
+      // et le bas ne doit pas sortir complètement de l'écran
+      const maxNegativeY = -(modalHeight - minVisibleTop)
+      const maxPositiveY = window.innerHeight - minVisibleTop // Au moins 200px du bas visible
+      newY = Math.max(maxNegativeY, Math.min(maxPositiveY, newY))
+      
+      // Contraintes pour X : le modal ne doit pas sortir complètement à gauche ou à droite
+      // Au moins 50px doivent rester visibles de chaque côté
+      const minVisibleSide = 50
+      const maxNegativeX = -(modalWidth - minVisibleSide)
+      const maxPositiveX = window.innerWidth - minVisibleSide
+      newX = Math.max(maxNegativeX, Math.min(maxPositiveX, newX))
+      
+      position.value = {
+        x: newX,
+        y: newY
+      }
+    }
+  }
+  
+  const handleMouseUp = () => {
+    if (isDragging.value && contentElement.value) {
+      isDragging.value = false
+      contentElement.value.style.cursor = ''
+    }
+  }
+  
   document.addEventListener('keydown', handleEscape)
+  document.addEventListener('mousemove', handleMouseMove)
+  document.addEventListener('mouseup', handleMouseUp)
   
   onUnmounted(() => {
     document.removeEventListener('keydown', handleEscape)
+    document.removeEventListener('mousemove', handleMouseMove)
+    document.removeEventListener('mouseup', handleMouseUp)
   })
 })
 </script>
@@ -75,19 +148,21 @@ onMounted(async () => {
   left: 0;
   width: 100%;
   height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(20px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 10000;
   animation: fadeInMac 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .text-viewer-content {
+  position: absolute;
   width: 80%;
-  max-width: 900px;
+  max-width: min(900px, calc(100vw - 40px));
   height: 80%;
+  max-height: calc(100vh - 120px);
   background: var(--bg-window);
   backdrop-filter: blur(10px);
   border-radius: 12px;
@@ -98,6 +173,7 @@ onMounted(async () => {
   overflow: hidden;
   animation: zoomInMac 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   transition: background-color 0.3s ease, border-color 0.3s ease;
+  cursor: default;
 }
 
 .text-viewer-header {
@@ -107,7 +183,14 @@ onMounted(async () => {
   background: var(--bg-window-header);
   border-bottom: 1px solid var(--border-color);
   position: relative;
+  flex-shrink: 0;
+  cursor: grab;
   transition: background-color 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+}
+
+.text-viewer-header:active {
+  cursor: grabbing;
 }
 
 .text-viewer-traffic-lights {

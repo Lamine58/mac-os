@@ -22,7 +22,7 @@
             <span>Parcourir</span>
           </div>
           <div class="sidebar-item">
-            <i class="bi bi-radio"></i>
+            <i class="bi bi-broadcast-pin"></i>
             <span>Radio</span>
           </div>
         </div>

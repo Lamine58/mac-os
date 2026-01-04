@@ -52,7 +52,7 @@ const { getAssetPath } = useAssetPath()
 
 const folderContentsData: Record<string, FileItem[]> = {
   "Parcours": [
-    { icon: "bi-file-earmark-person-fill", name: "Mon CV.pdf", color: "#e74c3c", date: "10 oct. 2025", size: "450 Ko", type: "PDF Document", file: getAssetPath("files/Mon CV.pdf") },
+    { icon: "bi-file-earmark-person-fill", name: "CV - Ishola Hasrafidine Abdel-Lamine.pdf", color: "#e74c3c", date: "10 oct. 2025", size: "450 Ko", type: "PDF Document", file: getAssetPath("files/CV - Ishola Hasrafidine Abdel-Lamine.pdf") },
     { icon: "bi-file-earmark-pdf-fill", name: "Mon Portfolio App Mobile - Ishola Hasrafidine.pdf", color: "#e74c3c", date: "15 oct. 2025", size: "2,5 Mo", type: "PDF Document", file: getAssetPath("files/Mon Portfolio App Mobile - Ishola Hasrafidine.pdf") },
     { icon: "bi-file-text-fill", name: "Lettre de motivation.txt", color: "#3498db", date: "28 déc. 2024", size: "3 Ko", type: "Document Texte", file: getAssetPath("files/Lettre de motivation.txt") },
     { icon: "bi-journal-code", name: "Compétences clés.md", color: "#f1c40f", date: "28 déc. 2024", size: "8 Ko", type: "Markdown File", file: getAssetPath("files/Compétences clés.md") },

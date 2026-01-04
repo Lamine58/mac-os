@@ -17,7 +17,7 @@
         class="day"
         :class="{ 'current-day': day.isToday }"
       >
-        {{ day.value }}
+        {{ day.value==0 ? '' : day.value }}
       </span>
     </div>
   </div>
